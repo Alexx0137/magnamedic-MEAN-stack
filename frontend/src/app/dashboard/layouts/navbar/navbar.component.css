@@ -1,0 +1,53 @@
+.dashboard-navbar {
+  background-color: #fff;
+  color: #858796;
+  padding: 20px 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Estilos para el contenedor de la imagen de usuario y el nombre en el navbar */
+.dashboard-navbar {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.user-profile {
+  padding: 0 12px;
+}
+
+
+.user-profile span {
+  font-size: 80%;
+  font-weight: 400;
+}
+
+.text-gray-600 {
+  color: #858796 !important
+}
+
+a {
+  text-decoration: none;
+}
+
+.dashboard-navbar .user-profile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.dashboard-navbar .user-profile {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.container-fluid {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}

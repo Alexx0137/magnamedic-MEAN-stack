@@ -1,0 +1,103 @@
+.sidebar {
+  width: 13rem;
+  background-color: #5a5c69;
+  color: #fff;
+  padding: 0 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+/* Estilos para el contenedor del logo en el sidebar */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+/* Estilos para la imagen del logo */
+.logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos para la lista de enlaces en el sidebar */
+.sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  align-items: flex-start;
+}
+.sidebar li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+
+.sidebar li span {
+  color: #FFFFFFCC;
+  font-size: 0.85rem;
+  display: inline;
+  font-weight: 400;
+  padding-left: 6px;
+}
+
+
+.sidebar li span:hover {
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.active {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.text-gray-600 {
+  color: #858796 !important
+}
+
+.text-gray-400 {
+  color: #d1d3e2 !important
+}
+
+
+/* Estilos para los iconos de FontAwesome en el sidebar */
+.iconSidebar {
+  margin-right: 10px; /* Espacio entre el icono y el texto */
+  width: 20px; /* Ancho deseado */
+  height: 20px; /* Alto deseado */
+}
+
+#wrapper #content-wrapper {
+  background-color: #f8f9fc;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#wrapper #content-wrapper #content {
+  flex: 1 0 auto;
+}
+
+#wrapper {
+  display: flex;
+}
+

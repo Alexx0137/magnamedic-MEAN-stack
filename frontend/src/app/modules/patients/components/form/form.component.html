@@ -1,0 +1,148 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="h3 mb-0 text-gray-800">{{ isEditMode ? 'Editar paciente' : 'Crear paciente'}}</h1>
+    </div>
+
+    <div class="card-body">
+        <form [formGroup]="patientForm">
+<!--            <ng-container *ngIf="!id">-->
+                <div class="form-row">
+                    <div class="form-group col-md-6 pr-3">
+                        <label>Nombres:</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               formControlName="name"
+                        >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Apellidos:</label>
+                        <input type="text"
+                               name="last_name"
+                               class="form-control"
+                               formControlName="last_name"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Tipo de documento:</label>
+                        <select name="identification_type_id"
+                                class="form-control"
+                                formControlName="identification_type_id"
+                        >
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="1">Registro civil</option>
+                            <option value="2">Tarjeta de identidad</option>
+                            <option value="3">Cédula de ciudadanía</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Número de documento:</label>
+                        <input type="number"
+                               name="identification"
+                               class="form-control"
+                               formControlName="identification"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Género:</label>
+                        <select name="gender_id"
+                                class="form-control"
+                                formControlName="gender_id"
+                        >
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="1">Femenino</option>
+                            <option value="2">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Tipo de sangre:</label>
+                        <select name="blood_type_id"
+                                class="form-control"
+                                formControlName="blood_type_id"
+                        >
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="1">A+</option>
+                            <option value="2">A-</option>
+                            <option value="3">B+</option>
+                            <option value="4">B-</option>
+                            <option value="5">AB+</option>
+                            <option value="6">AB-</option>
+                            <option value="7">O+</option>
+                            <option value="8">O-</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>EPS:</label>
+                        <select name="eps"
+                                class="form-control"
+                                formControlName="eps"
+                        >
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="1">Compensar</option>
+                            <option value="2">Salud Total</option>
+                            <option value="3">Sura</option>
+                            <option value="4">Coomeva</option>
+                            <option value="5">Sanitas</option>
+                            <option value="6">Nueva EPS</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Dirección:</label>
+                        <input type="text"
+                               name="address"
+                               class="form-control"
+                               formControlName="address"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Teléfono:</label>
+                        <input type="text"
+                               name="telephone"
+                               class="form-control"
+                               formControlName="telephone"
+                        >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Correo:</label>
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               formControlName="email"
+                        >
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-6">
+                        <label>Fecha de nacimiento:</label>
+                        <input type="date"
+                               name="birth_date"
+                               class="form-control"
+                               formControlName="birth_date"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <a routerLink="/patients/list" class="btn btn-secondary btn-sm mt-2 mx-1">
+                            <i class="fas fa-fw fa-arrow-left"></i>
+                            Cancelar
+                        </a>
+                        <button class="btn btn-primary btn-sm mt-2 mx-1"
+                                [disabled]="patientForm.invalid"
+                                (click)="submit()">
+                            {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+                        </button>
+                    </div>
+                </div>
+<!--            </ng-container>-->
+        </form>
+    </div>
+</div>
