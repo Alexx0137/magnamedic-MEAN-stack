@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {RouterOutlet} from "@angular/router";
+import {AsideComponent} from "./layouts/aside/aside.component";
+import {NavbarComponent} from "./layouts/navbar/navbar.component";
+import {FooterComponent} from "./layouts/footer/footer.component";
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
+    selector: 'app-dashboard',
+    standalone: true,
     imports: [
-        NgForOf,
-        NgIf,
-        RouterLink
+        AsideComponent,
+        NavbarComponent,
+        FooterComponent,
+        RouterOutlet
     ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
 

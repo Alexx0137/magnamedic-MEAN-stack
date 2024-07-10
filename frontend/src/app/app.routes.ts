@@ -1,18 +1,22 @@
 import {Routes} from '@angular/router';
+import {LoginComponent} from "./modules/auth/components/login/login.component";
 
 export const routes: Routes = [
     {
-        path: 'dashboard',
-        loadChildren: () => import('./modules/dashboard/dashboard.routes'),
-    },
-    {
-        path: "patients",
-        loadChildren: () => import('./modules/patients/patients.routes')
-    },
-    {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: '/login',
         pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'dashboard',
+        loadChildren: () =>
+            import('./modules/dashboard/dashboard.routes').then(m => m.routes),
     }
-
 ];
+
+export class AppRoutes {
+}

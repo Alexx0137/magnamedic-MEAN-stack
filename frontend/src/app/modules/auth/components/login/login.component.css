@@ -1,0 +1,201 @@
+
+/* FORM */
+
+/* Establecer un ancho máximo para el formulario */
+.form {
+    max-width: 100%;
+}
+
+/* Estilos personalizados para el formulario */
+.form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.form .form-row .col-md-6 {
+    flex-basis: calc(50% - 30px);
+    margin-right: 20px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+    .form .form-row .col-md-6 {
+        flex-basis: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+.form select {
+    max-width: 100%;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+
+
+/*LOGIN*/
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-radius: 1rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    margin-top: auto;
+}
+
+.card-logo-container {
+    height: 100%;
+}
+
+.form-login {
+    padding: 2rem;
+}
+
+.smaller-logo {
+    max-width: 250px;
+}
+
+.divider {
+    border-left: 1px solid #ababab;
+    height: 70px;
+    margin: 0 5px;
+}
+
+.o-hidden {
+    overflow: hidden !important;
+}
+
+.border-0 {
+    border: 0 !important;
+}
+
+.col-xl-3 {
+    flex: 0 0 25%;
+    max-width: 25%
+}
+
+.btn-user {
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+}
+
+.btn-block {
+    display: block;
+    width: 60%;
+    margin: 0 auto; /* Centrar el botón horizontalmente */
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Estilos personalizados para los campos de entrada */
+.form-control {
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.form-control-user {
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+}
+
+.background-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('/assets/media/images/background_login.png') center/cover no-repeat;
+    position: relative;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.dropdown-menu-custom {
+    top: 30px!important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.gradient-bg {
+    background: linear-gradient(to bottom right, #00c6ff, #0d6efd);
+    color: white;
+}
+
+.gradient-bg .text-center {
+    text-align: center;
+}
+
+.gradient-bg .text-left {
+    text-align: left;
+}
+
+.gradient-bg ul {
+    padding-left: 20px;
+}
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.welcome-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+.explaining {
+    margin-bottom: 0;
+}

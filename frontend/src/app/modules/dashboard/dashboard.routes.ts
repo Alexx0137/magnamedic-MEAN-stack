@@ -1,9 +1,11 @@
-import {RouterModule, Routes} from '@angular/router';
+import { Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard.component';
+import { Routing } from './routing';
+
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./dashboard.component').then(m => m.DashboardComponent)
-    },
-]
-
-export default routes;
+        component: DashboardComponent,
+        children: Routing
+    }
+];

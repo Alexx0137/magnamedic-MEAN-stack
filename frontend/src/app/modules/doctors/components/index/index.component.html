@@ -1,0 +1,62 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-sm-flex align-items-center justify-content-between mb-2">
+            <h1 class="h3 mb-0 text-gray-800">Médicos</h1>
+            <a routerLink="/doctors/form" class="btn btn-primary btn-sm btn-icon-split">
+                <i class="fas fa-plus fa-sm"></i>
+                Crear Médico
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar...">
+            <button class="search-button">Buscar</button>
+        </div>
+        <div class="table-responsive">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Especialidad</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th style="width: 120px;">Acciones</th>
+                </tr>
+                </thead>
+                <div *ngIf="isLoading">
+                    Cargando médicos...
+                </div>
+                <tbody>
+                <tr *ngFor="let doctor of doctors">
+                    <td>{{ doctor.identification }}</td>
+                    <td>{{ doctor.name }} {{ doctor.last_name }}</td>
+                    <td>{{ doctor.email }}</td>
+                    <td>{{ doctor.medical_speciality }}</td>
+                    <td>{{ doctor.telephone }}</td>
+                    <td>{{ doctor.address }}</td>
+                    <td>
+                        <a [routerLink]="['/doctors/forgot-password/', doctor._id ]"
+                           class="btn btn-warning btn-sm me-1"
+                           title="Editar">
+                            <i class="fas fa-edit fa-lg"></i>
+                        </a>
+                        <button type="button"
+                                (click)="questionDeleteDoctor(doctor)"
+                                class="btn btn-danger btn-sm"
+                                title="Eliminar">
+                            <i class="fas fa-trash fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="!doctors.length">
+                    <td colspan="6" class="text-center">No hay médicos para mostrar</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

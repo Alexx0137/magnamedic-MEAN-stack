@@ -1,0 +1,54 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-sm-flex align-items-center justify-content-between mb-2">
+            <h1 class="h3 mb-0 text-gray-800">Especialidades médicas</h1>
+            <a routerLink="/specialities/form" class="btn btn-primary btn-sm btn-icon-split">
+                <i class="fas fa-plus fa-sm"></i>
+                Crear especialidad
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar...">
+            <button class="search-button">Buscar</button>
+        </div>
+        <div class="table-responsive">
+            <table class="styled-table" style="width: 700px;">
+                <thead>
+                <tr>
+                    <th style="width: 120px;">Código</th>
+                    <th>Nombre</th>
+                    <th style="width: 120px;">Acciones</th>
+                </tr>
+                </thead>
+                <div *ngIf="isLoading">
+                    Cargando especialidades médicas...
+                </div>
+                <tbody>
+                <tr *ngFor="let speciality of specialities">
+                    <td>{{ speciality.code }}</td>
+                    <td>{{ speciality.name }}
+                    <td>
+                        <a [routerLink]="['/specialities/forgot-password/', speciality._id ]"
+                           class="btn btn-warning btn-sm me-1"
+                           title="Editar">
+                            <i class="fas fa-edit fa-lg"></i>
+                        </a>
+                        <button type="button"
+                                (click)="questionDeleteSpeciality(speciality)"
+                                class="btn btn-danger btn-sm"
+                                title="Eliminar">
+                            <i class="fas fa-trash fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="!specialities.length">
+                    <td colspan="6" class="text-center">No hay especialidades médicas para mostrar</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

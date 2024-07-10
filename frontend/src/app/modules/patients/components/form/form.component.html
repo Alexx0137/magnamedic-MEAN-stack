@@ -5,7 +5,6 @@
 
     <div class="card-body">
         <form [formGroup]="patientForm">
-<!--            <ng-container *ngIf="!id">-->
                 <div class="form-row">
                     <div class="form-group col-md-6 pr-3">
                         <label>Nombres:</label>
@@ -131,7 +130,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-6">
-                        <a routerLink="/patients/list" class="btn btn-secondary btn-sm mt-2 mx-1">
+                        <a routerLink="/dashboard/patients/list" class="btn btn-secondary btn-sm mt-2 mx-1">
                             <i class="fas fa-fw fa-arrow-left"></i>
                             Cancelar
                         </a>
@@ -142,7 +141,6 @@
                         </button>
                     </div>
                 </div>
-<!--            </ng-container>-->
         </form>
     </div>
 </div>

@@ -1,0 +1,91 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="h3 mb-0 text-gray-800"></h1>
+    </div>
+
+    <div class="card-body">
+        <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6 pr-3">
+                        <label>Nombres:</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               formControlName="name"
+                        >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Apellidos:</label>
+                        <input type="text"
+                               name="last_name"
+                               class="form-control"
+                               formControlName="last_name"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Tipo de documento:</label>
+                        <select name="identification_type_id"
+                                class="form-control"
+                                formControlName="identification_type_id"
+                        >
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="1">Registro civil</option>
+                            <option value="2">Tarjeta de identidad</option>
+                            <option value="3">Cédula de ciudadanía</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Número de documento:</label>
+                        <input type="number"
+                               name="identification"
+                               class="form-control"
+                               formControlName="identification"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Correo:</label>
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               formControlName="email"
+                        >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Contraseña:</label>
+                        <input type="text"
+                               name="password"
+                               class="form-control"
+                               formControlName="password"
+                        >
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-6">
+                        <label>Rol de usuario:</label>
+                        <input type="text"
+                               name="role"
+                               class="form-control"
+                               formControlName="role"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <a routerLink="/users/list" class="btn btn-secondary btn-sm mt-2 mx-1">
+                            <i class="fas fa-fw fa-arrow-left"></i>
+                            Cancelar
+                        </a>
+                        <button class="btn btn-primary btn-sm mt-2 mx-1"
+                               >
+
+                        </button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>

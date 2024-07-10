@@ -1,0 +1,41 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h1 class="h3 mb-0 text-gray-800">{{ isEditMode ? 'Editar especialidad médica' : 'Crear especialidad médica'}}</h1>
+    </div>
+
+    <div class="card-body">
+        <form [formGroup]="specialityForm">
+                <div class="form-row">
+                    <div class="form-group col-md-6 pr-3">
+                        <label>Código:</label>
+                        <input type="text"
+                               name="code"
+                               class="form-control"
+                               formControlName="code"
+                        >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Nombre especialidad:</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               formControlName="name"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <a routerLink="/specialities/list" class="btn btn-secondary btn-sm mt-2 mx-1">
+                            <i class="fas fa-fw fa-arrow-left"></i>
+                            Cancelar
+                        </a>
+                        <button class="btn btn-primary btn-sm mt-2 mx-1"
+                                [disabled]="specialityForm.invalid"
+                                (click)="submit()">
+                            {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+                        </button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>

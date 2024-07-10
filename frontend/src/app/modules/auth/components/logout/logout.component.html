@@ -1,0 +1,67 @@
+<div class="background-container d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5 mx-auto">
+                    <div class="card-body p-0">
+
+                        <div class="row">
+
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <div
+                                    class="card-logo-container d-flex align-items-center justify-content-center">
+                                    <div class="image-container">
+                                        <img src={logo} alt="Logo de Magnamedic"
+                                             class="img-fluid centered-and-resized smaller-logo"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-login">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900"><strong>Iniciar sesión</strong></h1>
+                                    </div>
+                                    <form class="user" onSubmit={handleSubmit}>
+                                        <div class="form-group">
+                                            <label htmlFor="inputEmail"></label>
+                                            <input
+                                                type="email"
+                                                class="form-control form-control-user"
+                                                id="inputEmail"
+                                                aria-describedby="emailHelp"
+                                                placeholder="Email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label htmlFor="inputPassword"></label>
+                                            <input
+                                                type="password"
+                                                class="form-control form-control-user"
+                                                id="inputPassword"
+                                                placeholder="Contraseña"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
+                                        </div>
+                                        <a href="/"></a>
+                                        <button type="submit"
+                                                class="btn btn-primary btn-user btn-block mt-3">
+                                            Login
+                                        </button>
+                                    </form>
+                                    <hr/>
+                                    <div class="text-center">
+                                        <a class="small" href="#">¿Olvidaste la contraseña?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
