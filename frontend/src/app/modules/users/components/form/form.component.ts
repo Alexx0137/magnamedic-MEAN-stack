@@ -22,6 +22,7 @@ export class FormComponent implements OnInit {
     userForm!: FormGroup;
     public id: any = null;
     isEditMode = false;
+    isActive= false ;
 
     constructor(
         private userService: UserService,
@@ -54,6 +55,7 @@ export class FormComponent implements OnInit {
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required]],
             role: ['', [Validators.required]],
+            state: [true, [Validators.required]],
         });
     }
 
@@ -83,13 +85,12 @@ export class FormComponent implements OnInit {
     getUser() {
         this.userService.showUser(this.id)
             .subscribe(response => {
-                console.log("paciente", response);
-                if (response.birth_date) {
-                    response.birth_date = response.birth_date.slice(0, 10);
-                }
+                console.log("usuario", response);
+                response.state = response.state === 'true';
                 this.userForm.patchValue(response);
             });
     }
+
 
     updateUser(form_value: any) {
         form_value._method = 'PUT';

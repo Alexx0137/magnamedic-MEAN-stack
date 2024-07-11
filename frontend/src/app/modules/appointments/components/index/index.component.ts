@@ -5,6 +5,7 @@ import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import {DoctorService} from "../../../doctors/services/doctor.service";
+import {SpecialityService} from "../../../specialities/services/speciality.service";
 
 @Component({
     selector: 'app-login',
@@ -22,17 +23,21 @@ export class IndexComponent implements OnInit {
 
     public isLoading: boolean = false;
     appointments: any[] = [];
+    doctors: any[] = [];
+    specialities: any[] = [];
 
     /**
      * Constructor del componente.
      * @param appointmentService Servicio para gestionar las citas médicas.
      * @param toastr Servicio para mostrar notificaciones.
      * @param doctorService
+     * @param specialityService
      */
     constructor(
         private appointmentService: AppointmentService,
         private toastr: ToastrService,
-        private doctorService: DoctorService
+        private doctorService: DoctorService,
+        private specialityService: SpecialityService
         ) { }
 
     /**
@@ -41,7 +46,9 @@ export class IndexComponent implements OnInit {
      */
     ngOnInit() {
         this.isLoading = true;
-        this.getAppointments()
+        this.getAppointments();
+        this.loadDoctors();
+        this.loadSpecialities();
     }
 
     /**
@@ -86,5 +93,27 @@ export class IndexComponent implements OnInit {
                 this.deleteAppointment(appointment._id);
             }
         });
+    }
+
+    loadDoctors() {
+        this.doctorService.getDoctors().subscribe((data: any[]) => {
+            this.doctors = data;
+        });
+    }
+
+    loadSpecialities() {
+        this.specialityService.getSpecialities().subscribe((data: any[]) => {
+            this.specialities = data;
+        });
+    }
+
+    getDoctorName(doctorId: string): string {
+        const doctor = this.doctors.find(d => d._id === doctorId);
+        return doctor ? `${doctor.name} ${doctor.last_name}` : 'Desconocido';
+    }
+
+    getSpecialityName(specialityId: string): string {
+        const speciality = this.specialities.find(s => s._id === specialityId);
+        return speciality ? speciality.name : 'Desconocida';
     }
 }

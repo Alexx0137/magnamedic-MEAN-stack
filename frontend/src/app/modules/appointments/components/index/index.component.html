@@ -32,8 +32,8 @@
                 <tr *ngFor="let appointment of appointments">
                     <td>{{ appointment.date | date: 'dd-MM' }} {{ appointment.time }}</td>
                     <td>{{ appointment.name }} {{ appointment.last_name }}</td>
-                    <td>{{ appointment.speciality_id }}</td>
-                    <td>{{ appointment.doctor_id}}</td>
+                    <td>{{ getSpecialityName(appointment.speciality_id) }}</td>
+                    <td>{{ getDoctorName(appointment.doctor_id) }}</td>
                     <td>
                         <a [routerLink]="['/dashboard/appointments/form/', appointment._id ]"
                            class="btn btn-warning btn-sm me-1"

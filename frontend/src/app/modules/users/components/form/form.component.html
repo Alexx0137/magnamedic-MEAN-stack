@@ -67,11 +67,28 @@
                 <div class="form-row mt-2">
                     <div class="form-group col-md-6">
                         <label>Rol de usuario:</label>
-                        <input type="text"
-                               name="role"
-                               class="form-control"
-                               formControlName="role"
+                        <select name="role"
+                                class="form-control"
+                                formControlName="role"
                         >
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Doctor</option>
+                            <option value="3">Recepcionista</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Estado:</label>
+                        <div>
+                            <label class="form-check-label">
+                                <input type="radio" name="state" class="form-check-input" formControlName="state" [value]="true">
+                                Activo
+                            </label>
+                            <label class="form-check-label">
+                                <input type="radio" name="state" class="form-check-input" formControlName="state" [value]="false">
+                                Inactivo
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
 import Swal from 'sweetalert2';
-import { NgForOf, NgIf } from "@angular/common";
-import { RouterLink } from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
+import {NgForOf, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import {ToastrService} from 'ngx-toastr';
+import {User} from "../../../../models/user";
 
 @Component({
     selector: 'app-login',
@@ -19,7 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 export class IndexComponent implements OnInit {
 
     public isLoading: boolean = false;
-    users: any[] = [];
+    users: User[] = [];
 
     /**
      * Constructor del componente.
@@ -29,7 +30,8 @@ export class IndexComponent implements OnInit {
     constructor(
         private userService: UserService,
         private toastr: ToastrService
-        ) { }
+    ) {
+    }
 
     /**
      * Método de inicialización del componente.
@@ -43,22 +45,56 @@ export class IndexComponent implements OnInit {
     /**
      * Obtiene la lista de usuarios del servicio.
      */
-    getUsers(){
-        this.userService.getUsers().subscribe((data) => {
-            this.users = data;
-            this.isLoading = false;
+    getUsers() {
+        this.userService.getUsers().subscribe({
+            next: (data: User[]) => {
+                this.users = data.map((user: User) => ({
+                    ...user,
+                    roleName: this.getRoleName(user.role)
+                }));
+                this.isLoading = false;
+            },
+            error: (error) => {
+                console.error('Error al obtener la lista de usuarios:', error);
+                this.toastr.error('Error al obtener la lista de usuarios', 'Error');
+                this.isLoading = false;
+            }
         });
     }
+
+
+    /**
+     * Obtiene el nombre del rol a partir del id del rol.
+     * @param roleId Id del rol.
+     * @returns Nombre del rol.
+     */
+    getRoleName(roleId: string): string {
+        switch (roleId) {
+            case '1':
+                return 'Administrador';
+            case '2':
+                return 'Doctor';
+            case '3':
+                return 'Recepcionista';
+            default:
+                return 'Desconocido';
+        }
+    }
+
 
     /**
      * Eliminar un usuario.
      * @param id Id del usuario.
      */
-    deleteUser(id: string) {
+    deleteUser(id
+                   :
+                   string
+    ) {
         this.userService.deleteUser(id).subscribe({
             next: (response) => {
                 this.getUsers();
-                this.toastr.success(response.message, 'Muy bien');            },
+                this.toastr.success(response.message, 'Muy bien');
+            },
             error: () => {
                 this.toastr.error('Hubo un error al eliminar el usuario', 'Error');
             }
@@ -69,7 +105,10 @@ export class IndexComponent implements OnInit {
      * Muestra un cuadro de diálogo de confirmación antes de eliminar un usuario.
      * @param user El usuario a eliminar.
      */
-    questionDeleteUser(user: any) {
+    questionDeleteUser(user
+                           :
+                           any
+    ) {
         Swal.fire({
             title: '¿Eliminar?',
             text: `¿Está seguro de eliminar el usuario ${user.name}?`,

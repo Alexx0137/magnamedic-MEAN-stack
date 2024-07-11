@@ -21,6 +21,7 @@
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Rol</th>
+                    <th>Estado</th>
                     <th style="width: 120px;">Acciones</th>
                 </tr>
                 </thead>
@@ -31,7 +32,8 @@
                 <tr *ngFor="let user of users">
                     <td>{{ user.name }} {{ user.last_name }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.role }}</td>
+                    <td>{{ getRoleName(user.role) }}</td>
+                    <td>{{ user.state ? 'Activo' : 'Inactivo' }}</td>
                     <td>
                         <a [routerLink]="['/dashboard/users/form/', user._id ]"
                            class="btn btn-warning btn-sm me-1"
