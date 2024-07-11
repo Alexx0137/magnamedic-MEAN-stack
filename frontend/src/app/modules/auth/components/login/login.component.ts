@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {CommonModule, NgOptimizedImage} from '@angular/common'; // Asegúrate de importar CommonModule
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
     selector: 'app-login',
@@ -13,13 +14,23 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    credentials = { email: '', password: '' };
+    credentials = {
+        email: '',
+        password: ''
+    };
     errorMessage = '';
 
     private authService = inject(AuthService);
     private router = inject(Router);
 
-    onLogin() {
+    /**
+     * Iniciar sesión con las credenciales proporcionadas.
+     * Envía las credenciales al servicio de autenticación y maneja la respuesta.
+     *
+     * @returns {void}
+     * @author [Tu Nombre]
+     */
+    login(): void {
         this.authService.login(this.credentials).subscribe({
             next: (response) => {
                 console.log('Inicio de sesión exitoso:', response);
@@ -28,13 +39,8 @@ export class LoginComponent {
                 this.router.navigate([returnUrl]);
             },
             error: (error: HttpErrorResponse) => {
-                if (error.status === 401) {
-                    this.errorMessage = 'Credenciales inválidas';
-                } else if (error.status === 404) {
-                    this.errorMessage = 'Usuario no encontrado';
-                } else {
-                    this.errorMessage = 'Error en el servidor';
-                }
+                console.log(error);
+                this.errorMessage = error.error;
             }
         });
     }

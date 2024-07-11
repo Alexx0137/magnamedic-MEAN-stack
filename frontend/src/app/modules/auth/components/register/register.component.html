@@ -1,0 +1,79 @@
+<div class="background-container d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5 mx-auto">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-login">
+                                    <div class="text-center">
+                                        <div class="image-container">
+                                            <img ngSrc="/assets/media/images/magnamedic(5).png" alt="Logo de Magnamedic"
+                                                 class="img-fluid centered-and-resized smaller-logo mb-3" height="229"
+                                                 width="498"
+                                                 priority/>
+                                        </div>
+                                        <h1 class="h4 text-gray-800 mb-0"><strong>Regístrate</strong></h1>
+                                    </div>
+                                    <form (ngSubmit)="register(registerForm.value)" #registerForm="ngForm">
+
+                                    <div class="form-group ">
+                                            <label for="email"></label>
+                                            <input type="email"
+                                                   class="form-control form-control-user"
+                                                   id="email"
+                                                   [(ngModel)]="credentials.email"
+                                                   name="email"
+                                                   placeholder="Correo"
+                                                   required
+                                                   autofocus
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password"></label>
+                                            <input type="password"
+                                                   class="form-control form-control-user"
+                                                   id="password"
+                                                   [(ngModel)]="credentials.password"
+                                                   name="password"
+                                                   placeholder="Contraseña"
+                                                   required
+                                            />
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit"
+                                                    class="btn btn-primary btn-user btn-block mt-3">
+                                                Regístrate
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <div *ngIf="errorMessage" class="text-danger text-center">{{ errorMessage }}</div>
+                                    <hr/>
+                                    <div class="text-center">
+                                        <a class="small" href="/login">Volver al login</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-none d-lg-block gradient-bg d-flex align-items-center justify-content-center">
+                                <div class="form-login">
+                                    <div class="overlay-panel overlay-right text-white">
+                                        <h1 class="welcome-title">Bienvenido a <br>
+                                            Magnamedic</h1>
+                                        <p class="explaining">Aquí, puedes programar, reprogramar y cancelar citas médicas fácilmente,
+                                            acceder a la información de los pacientes y médicos de manera rápida y segura,
+                                            consultar el historial de citas y mantener un seguimiento detallado,
+                                            gestionar especialidades y horarios de los doctores,
+                                            recibir notificaciones y recordatorios de citas.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

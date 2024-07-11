@@ -11,14 +11,14 @@ app.set('port', process.env.PORT || 3000);
 // Middleware
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors());
 
 // Rutas de nuestro servidor
 app.use('/api/patients', verifyToken, require('./routes/patient.route'));
-app.use('/api/doctors', require('./routes/doctor.route'));
-app.use('/api/specialities', require('./routes/speciality.route'));
+app.use('/api/doctors', verifyToken, require('./routes/doctor.route'));
+app.use('/api/specialities', verifyToken, require('./routes/speciality.route'));
 app.use('/api/users', require('./routes/user.route'));
-app.use('/api/appointments', require('./routes/appointment.route'));
+app.use('/api/appointments', verifyToken, require('./routes/appointment.route'));
 
 app.use('/api/auth', require('./routes/auth.route'))
 

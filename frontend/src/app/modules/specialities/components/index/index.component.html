@@ -2,7 +2,7 @@
     <div class="card-header py-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="h3 mb-0 text-gray-800">Especialidades médicas</h1>
-            <a routerLink="/specialities/form" class="btn btn-primary btn-sm btn-icon-split">
+            <a routerLink="/dashboard/specialities/form" class="btn btn-primary btn-sm btn-icon-split">
                 <i class="fas fa-plus fa-sm"></i>
                 Crear especialidad
             </a>
@@ -31,7 +31,7 @@
                     <td>{{ speciality.code }}</td>
                     <td>{{ speciality.name }}
                     <td>
-                        <a [routerLink]="['/specialities/forgot-password/', speciality._id ]"
+                        <a [routerLink]="['/dashboard/specialities/form/', speciality._id ]"
                            class="btn btn-warning btn-sm me-1"
                            title="Editar">
                             <i class="fas fa-edit fa-lg"></i>

@@ -2,7 +2,7 @@
 
 import {Routes} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
-import {LogoutComponent} from "./components/logout/logout.component"; // Si cambiaste el nombre
+import {RegisterComponent} from "./components/register/register.component"; // Si cambiaste el nombre
 
 const routes: Routes = [
     {
@@ -14,7 +14,7 @@ const routes: Routes = [
             },
             {
                 path: 'register',
-                component: LogoutComponent,
+                component: RegisterComponent,
             },
         ],
     },

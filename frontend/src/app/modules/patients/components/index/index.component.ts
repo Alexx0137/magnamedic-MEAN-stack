@@ -31,7 +31,13 @@ export class IndexComponent implements OnInit {
         this.getPatients()
     }
 
-    getPatients(){
+    /**
+     * Obtener la lista de pacientes.
+     *
+     * @returns {void}
+     * @author Nelson García
+     */
+    getPatients(): void {
         this.patientService.getPatients().subscribe((data) => {
             this.patients = data;
             this.isLoading = false;
@@ -40,9 +46,12 @@ export class IndexComponent implements OnInit {
 
     /**
      * Eliminar un paciente.
-     * @param id Id del paciente.
+     *
+     * @param {string} id - Id del paciente.
+     * @returns {void}
+     * @author Nelson García
      */
-    deletePatient(id: string) {
+    deletePatient(id: string): void {
         this.patientService.deletePatient(id).subscribe({
             next: (response) => {
                 this.getPatients();
@@ -53,7 +62,14 @@ export class IndexComponent implements OnInit {
         });
     }
 
-    questionDeletePatient(patient: any) {
+    /**
+     * Preguntar al usuario si desea eliminar un paciente.
+     *
+     * @param {any} patient - Datos del paciente.
+     * @returns {void}
+     * @author Nelson García
+     */
+    questionDeletePatient(patient: any): void {
         Swal.fire({
             title: '¿Eliminar?',
             text: `¿Está seguro de eliminar el paciente ${patient.name}?`,

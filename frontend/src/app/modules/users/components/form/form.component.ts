@@ -62,7 +62,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigate(['/users/list']);
+                    void this.router.navigate(['/dashboard/users/list']);
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al crear el paciente', 'Error');
@@ -98,7 +98,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigateByUrl('/users/list');
+                    void this.router.navigateByUrl('/dashboard/users/list');
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al actualizar el paciente', 'Error');

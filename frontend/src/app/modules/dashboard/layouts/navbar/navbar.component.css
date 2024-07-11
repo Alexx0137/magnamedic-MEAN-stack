@@ -33,6 +33,7 @@
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 .dashboard-navbar .user-profile img {

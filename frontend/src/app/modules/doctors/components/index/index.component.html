@@ -2,7 +2,7 @@
     <div class="card-header py-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="h3 mb-0 text-gray-800">Médicos</h1>
-            <a routerLink="/doctors/form" class="btn btn-primary btn-sm btn-icon-split">
+            <a routerLink="/dashboard/doctors/form" class="btn btn-primary btn-sm btn-icon-split">
                 <i class="fas fa-plus fa-sm"></i>
                 Crear Médico
             </a>
@@ -39,7 +39,7 @@
                     <td>{{ doctor.telephone }}</td>
                     <td>{{ doctor.address }}</td>
                     <td>
-                        <a [routerLink]="['/doctors/forgot-password/', doctor._id ]"
+                        <a [routerLink]="['/dashboard/doctors/form/', doctor._id ]"
                            class="btn btn-warning btn-sm me-1"
                            title="Editar">
                             <i class="fas fa-edit fa-lg"></i>

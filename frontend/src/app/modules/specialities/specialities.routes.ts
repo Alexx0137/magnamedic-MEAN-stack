@@ -13,7 +13,7 @@ export const routes: Routes = [
 
     },
     {
-        path: 'forgot-password/:id',
+        path: 'form/:id',
         loadComponent: () => import('./components/form/form.component').then(m => m.FormComponent)
 
     },

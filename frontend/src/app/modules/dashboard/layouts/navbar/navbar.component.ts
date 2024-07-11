@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
     selector: 'app-navbar',
@@ -13,14 +14,16 @@ import {Router, RouterLink} from "@angular/router";
     styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-    constructor(private router: Router) {} // Inject the router
+    private authService = inject(AuthService);
+
+
+    constructor(private router: Router) {}
 
     openSettingsModal() {
-        // Logic to open your settings modal (e.g., using a modal service)
+
     }
 
-    logout() {
-        // Call your authentication service's logout method
-        this.router.navigate(['/login']); // Navigate to login after logout
+    onLogout() {
+        this.authService.logout();
     }
 }

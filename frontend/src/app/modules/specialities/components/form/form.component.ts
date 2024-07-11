@@ -57,7 +57,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigate(['/specialities/list']);
+                    void this.router.navigate(['/dashboard/specialities/list']);
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al crear el especialidad médica', 'Error');
@@ -92,7 +92,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigateByUrl('/specialities/list');
+                    void this.router.navigateByUrl('/dashboard/specialities/list');
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al actualizar el especialidad médica', 'Error');
