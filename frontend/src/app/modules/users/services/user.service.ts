@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../../../models/user'
 
-interface UserResponse {
+export interface UserResponse {
     status: 'success' | 'error';
     message: string;
 }

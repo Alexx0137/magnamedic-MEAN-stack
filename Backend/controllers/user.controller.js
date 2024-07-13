@@ -30,7 +30,6 @@ userCtrl.getUsers = async (req, res) => {
  */
 userCtrl.createUser = async (req, res) => {
     try {
-        // Hashear el password antes de guardar el usuario
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const user = new User({ ...req.body, password: hashedPassword });
         await user.save();

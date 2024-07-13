@@ -3,29 +3,44 @@ const authCtrl = {};
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+/**
+ * Crear un nuevo usuario.
+ * @returns {Object} Mensaje de éxito o error.
+ * @author Nelson García
+ */
 authCtrl.register = async (req, res) => {
-    const {email, password} = req.body;
-    const newUser = new User({email, password});
-    await newUser.save();
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const user = new User({ ...req.body, password: hashedPassword });
+        await user.save();
+        res.status(201).json({
+            status: 'success',
+            message: 'Usuario creado exitosamente'
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Error al crear el usuario: ' + error.message
+        });
+    }
+};
 
-    const token = jwt.sign({_id: newUser._id}, 'secretKey')
-    res.status(200).json({token})
-
-}
-
+/**
+ * Autenticar un usuario.
+ * @returns {Object} Token JWT si la autenticación es exitosa, o mensaje de error.
+ * @author Nelson García
+ */
 authCtrl.login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) return res.status(401).json("El email no existe");
 
-    // Compare the hashed password
+    // Comparar la contraseña hasheada
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json("Contraseña incorrecta");
 
     const token = jwt.sign({ _id: user._id }, 'secretKey');
     return res.status(200).json({ token });
 };
-
-
 
 module.exports = authCtrl;

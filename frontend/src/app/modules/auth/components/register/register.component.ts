@@ -37,7 +37,7 @@ export class RegisterComponent {
      */
     register(data: any): void {
         this.isRegistering = true;
-        this.userService.createUser(data).subscribe({
+        this.authService.register(data).subscribe({
             next: (response) => {
                 this.toastr.success(response.message, 'Muy bien');
                 this.router.navigate(['/login']); // Redirigir al dashboard tras el registro

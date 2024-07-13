@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PatientService} from "../../services/patient.service";
@@ -18,6 +18,9 @@ import {Patient} from "../../../../models/patient";
     providers: [DatePipe],
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.css']
+})
+@Injectable({
+    providedIn: 'root'
 })
 export class FormComponent implements OnInit {
 

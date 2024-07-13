@@ -31,17 +31,22 @@ export class LoginComponent {
      * @author [Tu Nombre]
      */
     login(): void {
+        if (!this.credentials.email || !this.credentials.password) {
+            this.errorMessage = 'Por favor complete todos los campos';
+            return;
+        }
+
         this.authService.login(this.credentials).subscribe({
             next: (response) => {
-                console.log('Inicio de sesión exitoso:', response);
                 localStorage.setItem('token', response.token);
                 const returnUrl = this.router.getCurrentNavigation()?.extractedUrl.queryParamMap.get('returnUrl') || '/dashboard';
                 this.router.navigate([returnUrl]);
             },
             error: (error: HttpErrorResponse) => {
-                console.log(error);
-                this.errorMessage = error.error;
+                this.errorMessage = error.error || 'Error en el inicio de sesión. Inténtalo de nuevo.';
             }
         });
     }
+
+
 }
