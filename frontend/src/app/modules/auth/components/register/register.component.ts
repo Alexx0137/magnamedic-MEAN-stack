@@ -18,7 +18,9 @@ import {ToastrService} from "ngx-toastr";
 export class RegisterComponent {
     credentials = {
         email: '',
-        password: ''
+        password: '',
+        name: '',
+        last_name: ''
     };
     errorMessage = '';
     isRegistering = false;

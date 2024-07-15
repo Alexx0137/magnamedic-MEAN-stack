@@ -39,14 +39,14 @@ export class LoginComponent {
         this.authService.login(this.credentials).subscribe({
             next: (response) => {
                 localStorage.setItem('token', response.token);
+                localStorage.setItem('name', response.user.name); // Almacena el nombre
+                localStorage.setItem('last_name', response.user.last_name); // Almacena el apellido
                 const returnUrl = this.router.getCurrentNavigation()?.extractedUrl.queryParamMap.get('returnUrl') || '/dashboard';
                 this.router.navigate([returnUrl]);
             },
             error: (error: HttpErrorResponse) => {
-                this.errorMessage = error.error || 'Error en el inicio de sesión. Inténtalo de nuevo.';
+                this.errorMessage = error.error?.message || 'Error en el inicio de sesión. Inténtalo de nuevo.';
             }
         });
     }
-
-
 }

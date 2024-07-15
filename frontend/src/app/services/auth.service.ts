@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import {User} from "../models/user";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {UserResponse} from "../modules/users/services/user.service";
 
 @Injectable({
@@ -22,13 +22,16 @@ export class AuthService {
 
     /**
      * Inicia sesión al usuario con las credenciales proporcionadas.
-     *
-     * @param credentials Objeto con el correo electrónico y la contraseña del usuario.
-     * @returns Un Observable que emite la respuesta del servidor en caso de éxito, o un error en caso de fallo.
-     * @author Nelson garcía
      */
-    login(credentials: { email: string, password: string }){
+    login(credentials: { email: string, password: string }): Observable<any> {
         return this.http.post<any>(this.URL_API + '/login', credentials)
+            .pipe(tap(response => {
+                if (response.token) {
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('name', response.user.name);
+                    localStorage.setItem('last_name', response.user.last_name);
+                }
+            }));
     }
 
     /**

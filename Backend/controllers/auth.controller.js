@@ -33,14 +33,21 @@ authCtrl.register = async (req, res) => {
 authCtrl.login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) return res.status(401).json("El email no existe");
+    if (!user) return res.status(401).json({ message: "El email no existe" });
 
     // Comparar la contraseña hasheada
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json("Contraseña incorrecta");
+    if (!isMatch) return res.status(401).json({ message: "Contraseña incorrecta" });
 
     const token = jwt.sign({ _id: user._id }, 'secretKey');
-    return res.status(200).json({ token });
+    return res.status(200).json({
+        token,
+        user: {
+            name: user.name,
+            last_name: user.last_name
+        }
+    });
 };
+
 
 module.exports = authCtrl;

@@ -18,7 +18,31 @@
                                     </div>
                                     <form (ngSubmit)="register(registerForm.value)" #registerForm="ngForm">
 
-                                    <div class="form-group ">
+                                        <div class="form-group ">
+                                            <label for="name"></label>
+                                            <input type="text"
+                                                   class="form-control form-control-user"
+                                                   id="name"
+                                                   [(ngModel)]="credentials.name"
+                                                   name="name"
+                                                   placeholder="Nombres"
+                                                   required
+                                                   autofocus
+                                            />
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="last_name"></label>
+                                            <input type="text"
+                                                   class="form-control form-control-user"
+                                                   id="last_name"
+                                                   [(ngModel)]="credentials.last_name"
+                                                   name="last_name"
+                                                   placeholder="Apellidos"
+                                                   required
+                                                   autofocus
+                                            />
+                                        </div>
+                                        <div class="form-group ">
                                             <label for="email"></label>
                                             <input type="email"
                                                    class="form-control form-control-user"
@@ -56,13 +80,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 d-none d-lg-block gradient-bg d-flex align-items-center justify-content-center">
+                            <div
+                                class="col-lg-6 d-none d-lg-block gradient-bg d-flex align-items-center justify-content-center">
                                 <div class="form-login">
                                     <div class="overlay-panel overlay-right text-white">
                                         <h1 class="welcome-title">Bienvenido a <br>
                                             Magnamedic</h1>
-                                        <p class="explaining">Aquí, puedes programar, reprogramar y cancelar citas médicas fácilmente,
-                                            acceder a la información de los pacientes y médicos de manera rápida y segura,
+                                        <p class="explaining">Aquí, puedes programar, reprogramar y cancelar citas
+                                            médicas fácilmente,
+                                            acceder a la información de los pacientes y médicos de manera rápida y
+                                            segura,
                                             consultar el historial de citas y mantener un seguimiento detallado,
                                             gestionar especialidades y horarios de los doctores,
                                             recibir notificaciones y recordatorios de citas.
