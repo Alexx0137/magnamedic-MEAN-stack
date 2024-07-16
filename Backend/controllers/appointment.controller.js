@@ -67,6 +67,23 @@ appointmentCtrl.getAppointment = async (req, res) => {
 };
 
 /**
+ * Obtener citas médicas de un paciente por ID.
+ * @route GET /api/appointments/patient/:patientId
+ * @param {String} req.params.patientId - ID del paciente.
+ * @returns {Array} Lista de citas médicas del paciente.
+ * @author Nelson García
+ */
+appointmentCtrl.getAppointmentsByPatient = async (req, res) => {
+    const { patientId } = req.params;
+
+    try {
+        const appointments = await Appointment.find({ patient_id: patientId }).sort({ date: 1 });
+        res.json(appointments);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching patient appointments' });
+    }
+};
+/**
  * Actualizar una cita médica existente.
  * @route PUT /api/appointments/:id
  * @param {String} req.params.id - ID del usuario.

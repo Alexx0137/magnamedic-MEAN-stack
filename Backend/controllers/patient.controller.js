@@ -96,6 +96,10 @@ patientCtrl.eliminarPatient = async (req, res) => {
     }
 };
 
-
+patientCtrl.verificationPatient = async (req, res) => {
+    const { identification } = req.params;
+    const patient = await Patient.findOne({ identification });
+    res.send(!!patient);
+}
 
 module.exports = patientCtrl;

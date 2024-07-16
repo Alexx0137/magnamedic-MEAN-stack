@@ -1,4 +1,5 @@
 const Doctor = require('../models/doctor');
+const Patient = require("../models/patient");
 const doctorCtrl = {};
 
 
@@ -122,5 +123,13 @@ doctorCtrl.deleteDoctor = async (req, res) => {
         });
     }
 };
+
+doctorCtrl.verificationDoctor = async (req, res) => {
+    const { identification } = req.params;
+    const doctor = await Doctor.findOne({ identification });
+    res.send(!!doctor);
+}
+
+
 
 module.exports = doctorCtrl;

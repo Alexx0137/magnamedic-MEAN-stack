@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {catchError, Observable, throwError} from 'rxjs';
 import {Doctor} from '../../../models/doctor'
 
 interface DoctorResponse {
@@ -77,5 +77,9 @@ export class DoctorService {
      */
     deleteDoctor(_id: string): Observable<DoctorResponse> {
         return this.http.delete<DoctorResponse>(this.URL_API + `/${_id}`);
+    }
+
+    checkDoctorExists(identification: number): Observable<boolean> {
+        return this.http.get<boolean>(this.URL_API +`/exist/${identification}`);
     }
 }

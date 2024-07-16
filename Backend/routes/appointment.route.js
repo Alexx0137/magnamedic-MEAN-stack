@@ -8,4 +8,6 @@ router.get('/:id', appointmentCtrl.getAppointment);
 router.put('/:id', appointmentCtrl.updateAppointment);
 router.delete('/:id', appointmentCtrl.deleteAppointment);
 
+router.get('/patient/:patientId', appointmentCtrl.getAppointmentsByPatient);
+
 module.exports = router;

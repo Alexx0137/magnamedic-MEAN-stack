@@ -2,7 +2,7 @@
     <div class="card-header py-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="h3 mb-0 text-gray-800">Citas médicas</h1>
-            <a routerLink="/dashboard/appointments/form" class="btn btn-primary btn-sm btn-icon-split">
+            <a routerLink="/appointments/form" class="btn btn-primary btn-sm btn-icon-split">
                 <i class="fas fa-plus fa-sm"></i>
                 Crear cita médica
             </a>
@@ -10,19 +10,21 @@
     </div>
 
     <div class="card-body">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Buscar...">
-            <button class="search-button">Buscar</button>
-        </div>
+        <!--        <div class="search-container">-->
+        <!--            <input type="text" class="search-input" placeholder="Buscar...">-->
+        <!--            <button class="search-button">Buscar</button>-->
+        <!--        </div>-->
         <div class="table-responsive">
             <table class="styled-table">
                 <thead>
                 <tr>
-                    <th>Fecha/hora</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
                     <th>Paciente</th>
                     <th>Especialidad</th>
                     <th>Médico</th>
-                    <th style="width: 120px;">Acciones</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <div *ngIf="isLoading">
@@ -30,21 +32,30 @@
                 </div>
                 <tbody>
                 <tr *ngFor="let appointment of appointments">
-                    <td>{{ appointment.date | date: 'dd-MM' }} {{ appointment.time }}</td>
-                    <td>{{ appointment.name }} {{ appointment.last_name }}</td>
+                    <td>{{ appointment.date | date: 'dd/MM/yyy' }}</td>
+                    <td> {{ appointment.time }}</td>
+                    <td>{{ getPatientName(appointment.patient_id) }}</td>
                     <td>{{ getSpecialityName(appointment.speciality_id) }}</td>
                     <td>{{ getDoctorName(appointment.doctor_id) }}</td>
                     <td>
-                        <a [routerLink]="['/dashboard/appointments/form/', appointment._id ]"
+                        <span [ngClass]="{
+                            'bg-warning': appointment.state === 1,
+                            'bg-success': appointment.state === 0
+                        }" class="text-white px-2 py-1 rounded">
+                            {{ appointment.state === 1 ? 'Pendiente' : 'Atendida' }}
+                        </span>
+                    </td>
+                    <td>
+                        <a [routerLink]="['/appointments/form/', appointment._id ]"
                            class="btn btn-warning btn-sm me-1"
                            title="Editar">
-                            <i class="fas fa-edit fa-lg"></i>
+                            <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteAppointment(appointment)"
                                 class="btn btn-danger btn-sm"
                                 title="Eliminar">
-                            <i class="fas fa-trash fa-lg"></i>
+                            <i class="fas fa-trash fa-sm"></i>
                         </button>
                     </td>
                 </tr>

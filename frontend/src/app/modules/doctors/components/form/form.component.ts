@@ -3,9 +3,10 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DoctorService} from "../../services/doctor.service";
 import {ToastrService} from 'ngx-toastr';
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {of, switchMap} from "rxjs";
 import {Doctor} from "../../../../models/doctor";
+import {SpecialityService} from "../../../specialities/services/speciality.service";
 
 @Component({
     selector: 'app-forgot-password',
@@ -13,7 +14,8 @@ import {Doctor} from "../../../../models/doctor";
     imports: [
         RouterLink,
         ReactiveFormsModule,
-        NgIf
+        NgIf,
+        NgForOf
     ],
     providers: [DatePipe],
     templateUrl: './form.component.html',
@@ -24,6 +26,7 @@ export class FormComponent implements OnInit {
     doctorForm!: FormGroup;
     public id: any = null;
     isEditMode = false;
+    specialities: any[] = [];
 
     constructor(
         private doctorService: DoctorService,
@@ -31,11 +34,13 @@ export class FormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private toastr: ToastrService,
         private route: ActivatedRoute,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private specialityService: SpecialityService
     ) {}
 
     ngOnInit(): void {
         this.initForm();
+        this.getSpecialities();
 
         this.route.paramMap.pipe(
             switchMap(params => {
@@ -73,12 +78,10 @@ export class FormComponent implements OnInit {
             identification_type_id: ['', Validators.required],
             identification: ['', Validators.required],
             gender_id: ['', Validators.required],
-            blood_type_id: ['', Validators.required],
-            eps: ['', Validators.required],
             address: ['', Validators.required],
             telephone: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            medical_speciality: ['', [Validators.required]],
+            speciality_id: ['', [Validators.required]],
             professional_card: ['', [Validators.required]],
             birth_date: [null],
         });
@@ -89,7 +92,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigate(['/dashboard/doctors/list']);
+                    void this.router.navigate(['/doctors/list']);
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al crear el paciente', 'Error');
@@ -103,8 +106,21 @@ export class FormComponent implements OnInit {
         if (this.isEditMode) {
             this.updateDoctor(formData);
         } else {
-            this.createDoctor(formData);
+            this.checkDoctorExists(formData.identification).subscribe(exists => {
+                if (exists) {
+                    this.toastr.error('Ya existe un médico con ese número de documento.', 'Error');
+                } else {
+                this.createDoctor(formData);
+                }
+            }, error => {
+                console.error('Error al verificar el médico:', error);
+                this.toastr.error('Ocurrió un error al verificar el médico.', 'Error');
+            });
         }
+    }
+
+    checkDoctorExists(identification: number) {
+        return this.doctorService.checkDoctorExists(identification);
     }
 
     getDoctor() {
@@ -125,11 +141,19 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigateByUrl('/dashboard/doctors/list');
+                    void this.router.navigateByUrl('/doctors/list');
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al actualizar el paciente', 'Error');
                 }
             });
+    }
+    /**
+     * Obtiene la lista de las especialidades médicas del servicio.
+     */
+    getSpecialities() {
+        this.specialityService.getSpecialities().subscribe((data) => {
+            this.specialities = data;
+        });
     }
 }

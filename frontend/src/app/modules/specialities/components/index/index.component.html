@@ -2,7 +2,7 @@
     <div class="card-header py-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="h3 mb-0 text-gray-800">Especialidades médicas</h1>
-            <a routerLink="/dashboard/specialities/form" class="btn btn-primary btn-sm btn-icon-split">
+            <a routerLink="/specialities/form" class="btn btn-primary btn-sm btn-icon-split">
                 <i class="fas fa-plus fa-sm"></i>
                 Crear especialidad
             </a>
@@ -10,10 +10,10 @@
     </div>
 
     <div class="card-body">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Buscar...">
-            <button class="search-button">Buscar</button>
-        </div>
+<!--        <div class="search-container">-->
+<!--            <input type="text" class="search-input" placeholder="Buscar...">-->
+<!--            <button class="search-button">Buscar</button>-->
+<!--        </div>-->
         <div class="table-responsive">
             <table class="styled-table" style="width: 700px;">
                 <thead>
@@ -31,16 +31,16 @@
                     <td>{{ speciality.code }}</td>
                     <td>{{ speciality.name }}
                     <td>
-                        <a [routerLink]="['/dashboard/specialities/form/', speciality._id ]"
+                        <a [routerLink]="['/specialities/form/', speciality._id ]"
                            class="btn btn-warning btn-sm me-1"
                            title="Editar">
-                            <i class="fas fa-edit fa-lg"></i>
+                            <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteSpeciality(speciality)"
                                 class="btn btn-danger btn-sm"
                                 title="Eliminar">
-                            <i class="fas fa-trash fa-lg"></i>
+                            <i class="fas fa-trash fa-sm"></i>
                         </button>
                     </td>
                 </tr>

@@ -24,7 +24,7 @@ export class IndexComponent implements OnInit {
     constructor(
         private patientService: PatientService,
         private toastr: ToastrService
-        ) { }
+    ) { }
 
     ngOnInit() {
         this.isLoading = true;

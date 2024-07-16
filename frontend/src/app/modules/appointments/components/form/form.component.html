@@ -7,46 +7,36 @@
         <form [formGroup]="appointmentForm">
             <div class="form-row">
                 <div class="form-group col-md-6 pr-3">
-                    <label>Nombres:</label>
-                    <input type="text"
-                           name="name"
-                           class="form-control"
-                           formControlName="name"
-                           [readonly]="isEditMode"
-                    >
+                    <label>Paciente:</label>
+                    <ng-select
+                        [items]="filteredPatients"
+                        bindLabel="name"
+                        bindValue="_id"
+                        [placeholder]="'Seleccione un paciente'"
+                        formControlName="patient_id"
+                        (change)="onPatientChange($event)"
+                        [searchable]="true">
+                        <ng-template ng-label-tmp let-item="item">
+                            {{ item.identification }} - {{ item.name }}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item">
+                            {{ item.identification }} - {{ item.name }}
+                        </ng-template>
+                    </ng-select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Apellidos:</label>
-                    <input type="text"
-                           name="last_name"
-                           class="form-control"
-                           formControlName="last_name"
-                           [readonly]="isEditMode"
-                    >
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Tipo de documento:</label>
-                    <select name="identification_type_id"
-                            class="form-control"
-                            formControlName="identification_type_id"
-                            [disabled]="isEditMode"
-                    >
-                        <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="1">Registro civil</option>
-                        <option value="2">Tarjeta de identidad</option>
-                        <option value="3">Cédula de ciudadanía</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Número de documento:</label>
-                    <input type="number"
-                           name="identification"
-                           class="form-control"
-                           formControlName="identification"
-                           [readonly]="isEditMode"
-                    >
+                    <label>Estado:</label>
+                    <div>
+                        <label class="radius-state">
+                            <input type="radio" formControlName="state" [value]="1" class="mr-3">
+                            Pendiente
+                        </label>
+                        <label>
+                            <input type="radio" formControlName="state" [value]="0">
+                            Atendida
+                        </label>
+
+                    </div>
                 </div>
             </div>
             <div class="form-row">
@@ -72,9 +62,9 @@
                     >
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option *ngFor="let doctor of doctors"
-                        [value]="doctor._id"
+                                [value]="doctor._id"
                         >
-                        {{ doctor.name }} {{ doctor.last_name }}
+                            {{ doctor.name }} {{ doctor.last_name }}
                         </option>
                     </select>
                 </div>
@@ -82,20 +72,17 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Fecha:</label>
-                    <input type="date"
-                           name="date"
-                           class="form-control"
-                           formControlName="date"
-                    >
+                    <input type="date" formControlName="date" [min]="minDate" class="form-control" required>
                 </div>
+
                 <div class="form-group col-md-6">
                     <label>Hora:</label>
-                    <input type="time"
-                           name="time"
-                           class="form-control"
-                           formControlName="time"
-                    >
+                    <input type="time" formControlName="time" [min]="minTime" [max]="maxTime" class="form-control" required>
+                    <div *ngIf="appointmentForm.get('time')?.errors?.['outOfRange']" class="text-danger">
+                        La hora debe estar entre las 07:00 y las 18:00.
+                    </div>
                 </div>
+
             </div>
             <div class="form-row mt-2">
                 <div class="form-group col-md-12">
@@ -109,7 +96,7 @@
             </div>
             <div class="form-row">
                 <div class="col-md-6">
-                    <a routerLink="/dashboard/appointments/list" class="btn btn-secondary btn-sm mt-2 mx-1">
+                    <a routerLink="/appointments/list" class="btn btn-secondary btn-sm mt-2 mx-1">
                         <i class="fas fa-fw fa-arrow-left"></i>
                         Cancelar
                     </a>

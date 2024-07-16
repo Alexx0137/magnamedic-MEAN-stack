@@ -54,7 +54,7 @@ export class FormComponent implements OnInit {
         ).subscribe({
             next: (patient: Patient | null) => {
                 if (patient) {
-                    const formattedBirthDate = this.datePipe.transform(patient._birthDate, 'yyyy-MM-dd');
+                    const formattedBirthDate = this.datePipe.transform(patient.birthDate, 'yyyy-MM-dd');
 
                     this.patientForm.patchValue({
                         ...patient,
@@ -90,7 +90,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigate(['/dashboard/patients/list']);
+                    void this.router.navigate(['/patients/list']);
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al crear el paciente', 'Error');
@@ -104,9 +104,24 @@ export class FormComponent implements OnInit {
         if (this.isEditMode) {
             this.updatePatient(formData);
         } else {
-            this.createPatient(formData);
+            this.checkPatientExists(formData.identification).subscribe(exists => {
+                if (exists) {
+                    this.toastr.error('Ya existe un paciente con ese número de documento.', 'Error');
+                } else {
+                    this.createPatient(formData);
+                }
+            }, error => {
+                console.error('Error al verificar el paciente:', error);
+                this.toastr.error('Ocurrió un error al verificar el paciente.', 'Error');
+            });
         }
     }
+
+    checkPatientExists(identification: number) {
+        return this.patientService.checkPatientExists(identification);
+    }
+
+
 
     getPatient() {
         this.patientService.showPatient(this.id)
@@ -126,7 +141,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigateByUrl('/dashboard/patients/list');
+                    void this.router.navigateByUrl('/patients/list');
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al actualizar el paciente', 'Error');

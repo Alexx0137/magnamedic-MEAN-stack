@@ -18,9 +18,9 @@ export const routes: Routes = [
         component: RegisterComponent
     },
     {
-        path: 'dashboard',
+        path: '',
         loadChildren: () =>
-            import('./modules/dashboard/dashboard.routes').then(m => m.routes),
+            import('./layouts/layout.routes').then(m => m.routes),
         canActivate: [authGuard]
     }
 ];

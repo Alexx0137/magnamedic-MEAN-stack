@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
+import {SpecialityService} from "../../../specialities/services/speciality.service";
 
 @Component({
     selector: 'app-login',
@@ -20,16 +21,16 @@ export class IndexComponent implements OnInit {
 
     public isLoading: boolean = false;
     doctors: any[] = [];
+    specialities: any[] = [];
 
-    /**
-     * Constructor del componente.
-     * @param doctorService Servicio para gestionar los doctores.
-     * @param toastr Servicio para mostrar notificaciones.
-     */
+
     constructor(
         private doctorService: DoctorService,
-        private toastr: ToastrService
-        ) { }
+        private toastr: ToastrService,
+        private specialityService: SpecialityService
+
+
+    ) { }
 
     /**
      * Método de inicialización del componente.
@@ -37,7 +38,8 @@ export class IndexComponent implements OnInit {
      */
     ngOnInit() {
         this.isLoading = true;
-        this.getDoctors()
+        this.getDoctors();
+        this.loadSpecialities();
     }
 
     /**
@@ -82,6 +84,17 @@ export class IndexComponent implements OnInit {
                 this.deleteDoctor(doctor._id);
             }
         });
+    }
+
+    loadSpecialities() {
+        this.specialityService.getSpecialities().subscribe((data: any[]) => {
+            this.specialities = data;
+        });
+    }
+
+    getSpecialityName(specialityId: string): string {
+        const speciality = this.specialities.find(s => s._id === specialityId);
+        return speciality ? speciality.name : 'Desconocida';
     }
 
 }

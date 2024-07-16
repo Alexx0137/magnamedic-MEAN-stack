@@ -78,4 +78,9 @@ export class PatientService {
     deletePatient(_id: string): Observable<PatientResponse> {
         return this.http.delete<PatientResponse>(this.URL_API + `/${_id}`);
     }
+
+    checkPatientExists(identification: number): Observable<boolean> {
+        return this.http.get<boolean>(this.URL_API +`/exist/${identification}`);
+    }
+
 }

@@ -16,7 +16,7 @@ const DoctorSchema = new Schema({
     address: {type:String, require:true},
     telephone: {type:String, require:true},
     email: {type:String, require:true},
-    medical_speciality: {type:String, require:true},
+    speciality_id: {type:String, require:true},
     professional_card: {type:String, require:true},
 });
 

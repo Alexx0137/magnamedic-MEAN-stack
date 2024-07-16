@@ -2,7 +2,7 @@
     <div class="card-header py-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
-            <a routerLink="/dashboard/users/form" class="btn btn-primary btn-sm btn-icon-split">
+            <a routerLink="/users/form" class="btn btn-primary btn-sm btn-icon-split">
                 <i class="fas fa-plus fa-sm"></i>
                 Crear usuario
             </a>
@@ -10,10 +10,10 @@
     </div>
 
     <div class="card-body">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Buscar...">
-            <button class="search-button">Buscar</button>
-        </div>
+<!--        <div class="search-container">-->
+<!--            <input type="text" class="search-input" placeholder="Buscar...">-->
+<!--            <button class="search-button">Buscar</button>-->
+<!--        </div>-->
         <div class="table-responsive">
             <table class="styled-table">
                 <thead>
@@ -22,7 +22,7 @@
                     <th>Correo</th>
                     <th>Rol</th>
                     <th>Estado</th>
-                    <th style="width: 120px;">Acciones</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <div *ngIf="isLoading">
@@ -35,16 +35,16 @@
                     <td>{{ getRoleName(user.role) }}</td>
                     <td>{{ user.state ? 'Activo' : 'Inactivo' }}</td>
                     <td>
-                        <a [routerLink]="['/dashboard/users/form/', user._id ]"
+                        <a [routerLink]="['/users/form/', user._id ]"
                            class="btn btn-warning btn-sm me-1"
                            title="Editar">
-                            <i class="fas fa-edit fa-lg"></i>
+                            <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteUser(user)"
                                 class="btn btn-danger btn-sm"
                                 title="Eliminar">
-                            <i class="fas fa-trash fa-lg"></i>
+                            <i class="fas fa-trash fa-sm"></i>
                         </button>
                     </td>
                 </tr>

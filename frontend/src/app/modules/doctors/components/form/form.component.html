@@ -58,40 +58,6 @@
                         </select>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Tipo de sangre:</label>
-                        <select name="blood_type_id"
-                                class="form-control"
-                                formControlName="blood_type_id"
-                        >
-                            <option value="" disabled selected>Seleccione una opción</option>
-                            <option value="1">A+</option>
-                            <option value="2">A-</option>
-                            <option value="3">B+</option>
-                            <option value="4">B-</option>
-                            <option value="5">AB+</option>
-                            <option value="6">AB-</option>
-                            <option value="7">O+</option>
-                            <option value="8">O-</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>EPS:</label>
-                        <select name="eps"
-                                class="form-control"
-                                formControlName="eps"
-                        >
-                            <option value="" disabled selected>Seleccione una opción</option>
-                            <option value="1">Compensar</option>
-                            <option value="2">Salud Total</option>
-                            <option value="3">Sura</option>
-                            <option value="4">Coomeva</option>
-                            <option value="5">Sanitas</option>
-                            <option value="6">Nueva EPS</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
                         <label>Dirección:</label>
                         <input type="text"
                                name="address"
@@ -121,11 +87,17 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Especialidad:</label>
-                    <input type="text"
-                           name="medical_speciality"
-                           class="form-control"
-                           formControlName="medical_speciality"
+                    <select name="speciality_id"
+                            class="form-control"
+                            formControlName="speciality_id"
                     >
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option *ngFor="let speciality of specialities"
+                                [value]="speciality._id"
+                        >
+                            {{ speciality.name }}
+                        </option>
+                    </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label>Tarjeta profesional:</label>
@@ -148,7 +120,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-6">
-                        <a routerLink="/dashboard/doctors/list" class="btn btn-secondary btn-sm mt-2 mx-1">
+                        <a routerLink="/doctors/list" class="btn btn-secondary btn-sm mt-2 mx-1">
                             <i class="fas fa-fw fa-arrow-left"></i>
                             Cancelar
                         </a>

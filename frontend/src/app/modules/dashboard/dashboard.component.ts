@@ -1,21 +1,35 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from "@angular/router";
-import {AsideComponent} from "./layouts/aside/aside.component";
-import {NavbarComponent} from "./layouts/navbar/navbar.component";
-import {FooterComponent} from "./layouts/footer/footer.component";
+import {RouterLink, RouterOutlet} from "@angular/router";
+import {DashboardService} from "./services/dashboard.service";
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     imports: [
-        AsideComponent,
-        NavbarComponent,
-        FooterComponent,
-        RouterOutlet
+        RouterOutlet,
+        RouterLink
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+    totalAppointments: number = 0;
+    attendedAppointments: number = 0;
+    pendingAppointments: number = 0;
+    cancelledAppointments: number = 0;
 
+    constructor(private dashboardService: DashboardService) { }
+
+    ngOnInit(): void {
+        // this.loadStats();
+    }
+
+    loadStats(): void {
+        this.dashboardService.getAppointmentStats().subscribe((data: any) => {
+            this.totalAppointments = data.totalAppointments;
+            this.attendedAppointments = data.attendedAppointments;
+            this.pendingAppointments = data.pendingAppointments;
+            this.cancelledAppointments = data.cancelledAppointments;
+        });
+    }
 }

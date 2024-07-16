@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
 import Swal from 'sweetalert2';
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import {DoctorService} from "../../../doctors/services/doctor.service";
 import {SpecialityService} from "../../../specialities/services/speciality.service";
+import {PatientService} from "../../../patients/services/patient.service";
 
 @Component({
     selector: 'app-login',
@@ -14,7 +15,8 @@ import {SpecialityService} from "../../../specialities/services/speciality.servi
         NgForOf,
         NgIf,
         RouterLink,
-        DatePipe
+        DatePipe,
+        NgClass
     ],
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.css']
@@ -25,19 +27,15 @@ export class IndexComponent implements OnInit {
     appointments: any[] = [];
     doctors: any[] = [];
     specialities: any[] = [];
+    patients: any[] = [];
 
-    /**
-     * Constructor del componente.
-     * @param appointmentService Servicio para gestionar las citas médicas.
-     * @param toastr Servicio para mostrar notificaciones.
-     * @param doctorService
-     * @param specialityService
-     */
+
     constructor(
         private appointmentService: AppointmentService,
         private toastr: ToastrService,
         private doctorService: DoctorService,
-        private specialityService: SpecialityService
+        private specialityService: SpecialityService,
+        private patientService: PatientService
         ) { }
 
     /**
@@ -49,6 +47,7 @@ export class IndexComponent implements OnInit {
         this.getAppointments();
         this.loadDoctors();
         this.loadSpecialities();
+        this.loadPatients();
     }
 
     /**
@@ -107,6 +106,12 @@ export class IndexComponent implements OnInit {
         });
     }
 
+    loadPatients() {
+        this.patientService.getPatients().subscribe((data: any[]) => {
+            this.patients = data;
+        });
+    }
+
     getDoctorName(doctorId: string): string {
         const doctor = this.doctors.find(d => d._id === doctorId);
         return doctor ? `${doctor.name} ${doctor.last_name}` : 'Desconocido';
@@ -115,5 +120,10 @@ export class IndexComponent implements OnInit {
     getSpecialityName(specialityId: string): string {
         const speciality = this.specialities.find(s => s._id === specialityId);
         return speciality ? speciality.name : 'Desconocida';
+    }
+
+    getPatientName(patientId: string): string {
+        const patient = this.patients.find(s => s._id === patientId);
+        return patient ? patient.name : 'Desconocida';
     }
 }

@@ -3,6 +3,11 @@ import {authGuard} from "../../guards/auth.guard";
 
 const Routing: Routes = [
     {
+        path: 'dashboard',
+        loadChildren: () => import('../dashboard/dashboard.routes').then(m => m.routes),
+        canActivate: [authGuard]
+    },
+    {
         path: 'patients',
         loadChildren: () => import('../patients/patients.routes').then(m => m.routes),
         canActivate: [authGuard]

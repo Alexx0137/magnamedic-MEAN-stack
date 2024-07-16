@@ -44,6 +44,18 @@ export class AppointmentService {
     }
 
     /**
+     * Obtener citas médicas de un paciente.
+     *
+     * @param {string} patientId id del paciente.
+     * @return {Observable<any>}
+     * @author Nelson García
+     */
+    getAppointmentsByPatient(patientId: string): Observable<any> {
+        return this.http.get<any[]>(`${this.URL_API}/patient/${patientId}`);
+    }
+
+
+    /**
      * Guardar cita médica.
      *
      * @return {Observable<any>}

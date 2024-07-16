@@ -12,6 +12,10 @@ export const routes: Routes = [
     {
         path: 'form/:id',
         loadComponent: () => import('./components/form/form.component').then(m => m.FormComponent)
+    },
+    {
+        path: 'history/:id',
+        loadComponent: () => import('./components/history/history.component').then(m => m.HistoryComponent)
     }
 ];
 

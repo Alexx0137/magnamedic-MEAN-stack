@@ -1,32 +1,43 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AppointmentService} from "../../services/appointment.service";
-import {ToastrService} from 'ngx-toastr';
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {DoctorService} from "../../../doctors/services/doctor.service";
-import {SpecialityService} from "../../../specialities/services/speciality.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AppointmentService } from "../../services/appointment.service";
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe, NgForOf, NgIf } from "@angular/common";
+import { DoctorService } from "../../../doctors/services/doctor.service";
+import { SpecialityService } from "../../../specialities/services/speciality.service";
+import { PatientService } from "../../../patients/services/patient.service";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { CommonModule } from '@angular/common';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
-    selector: 'app-forgot-password',
+    selector: 'app-form',
     standalone: true,
     imports: [
+        CommonModule,
         RouterLink,
         ReactiveFormsModule,
         NgIf,
-        NgForOf
+        NgForOf,
+        FormsModule,
+        NgSelectModule
     ],
     providers: [DatePipe],
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
     appointmentForm!: FormGroup;
     public id: any = null;
     isEditMode = false;
     doctors: any[] = [];
     specialities: any[] = [];
+    patients: any[] = [];
+    filteredPatients: any[] = [];
+    minDate: string = '';
+    minTime: string = '07:00';
+    maxTime: string = '18:00';
 
     constructor(
         private appointmentService: AppointmentService,
@@ -35,14 +46,19 @@ export class FormComponent implements OnInit {
         private toastr: ToastrService,
         private route: ActivatedRoute,
         private doctorService: DoctorService,
-        private specialityService: SpecialityService
-    ) {
-    }
+        private specialityService: SpecialityService,
+        private patientService: PatientService,
+    ) {}
 
     ngOnInit(): void {
         this.initForm();
         this.getDoctors();
         this.getSpecialities();
+        this.getPatients();
+        this.filteredPatients = this.patients;
+
+        const today = new Date();
+        this.minDate = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
 
         this.route.paramMap.subscribe(params => {
             this.id = params.get('id');
@@ -56,16 +72,29 @@ export class FormComponent implements OnInit {
 
     initForm(): void {
         this.appointmentForm = this.formBuilder.group({
-            name: ['', Validators.required],
-            last_name: ['', Validators.required],
-            identification_type_id: ['', Validators.required],
-            identification: ['', Validators.required],
+            patient_id: ['', Validators.required],
             speciality_id: ['', Validators.required],
             doctor_id: ['', Validators.required],
-            date: ['', Validators.required],
-            time: ['', Validators.required],
-            observations: ['', Validators.required],
+            date: ['', [Validators.required]],
+            time: ['', [Validators.required, this.timeValidator.bind(this)]],
+            state: [1, Validators.required],
+            observations: ['', Validators.required]
         });
+    }
+
+    timeValidator(control: AbstractControl): ValidationErrors | null {
+        const time = control.value;
+        if (!time) return null;
+
+        const [hours, minutes] = time.split(':').map(Number);
+        const timeValue = hours * 60 + minutes;
+        const minTimeValue = 7 * 60; // 7:00 AM in minutes
+        const maxTimeValue = 18 * 60; // 6:00 PM in minutes
+
+        if (timeValue < minTimeValue || timeValue > maxTimeValue) {
+            return { outOfRange: true };
+        }
+        return null;
     }
 
     createAppointment(data: any): void {
@@ -73,7 +102,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigate(['/dashboard/appointments/list']);
+                    void this.router.navigate(['/appointments/list']);
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al crear la cita médica', 'Error');
@@ -108,7 +137,7 @@ export class FormComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     this.toastr.success(response.message, 'Muy bien');
-                    void this.router.navigateByUrl('/dashboard/appointments/list');
+                    void this.router.navigateByUrl('/appointments/list');
                 },
                 error: () => {
                     this.toastr.error('Hubo un error al actualizar la cita médica', 'Error');
@@ -116,21 +145,51 @@ export class FormComponent implements OnInit {
             });
     }
 
-    /**
-     * Obtiene la lista de doctores del servicio.
-     */
     getDoctors() {
         this.doctorService.getDoctors().subscribe((data) => {
             this.doctors = data;
         });
     }
 
-    /**
-     * Obtiene la lista de las especialidades médicas del servicio.
-     */
     getSpecialities() {
         this.specialityService.getSpecialities().subscribe((data) => {
             this.specialities = data;
         });
+    }
+
+    getPatients() {
+        this.patientService.getPatients().subscribe((data) => {
+            this.patients = data;
+            this.filteredPatients = data;
+        });
+    }
+
+    getAppointmentState(state: string): string {
+        return state === '1' ? 'Pendiente' : 'Atendida';
+    }
+
+    filterPatients(searchTerm: string) {
+        if (!searchTerm) {
+            this.filteredPatients = this.patients;
+        } else {
+            const lowerCaseTerm = searchTerm.toLowerCase();
+            this.filteredPatients = this.patients.filter(patient =>
+                patient.name.toLowerCase().includes(lowerCaseTerm) ||
+                patient.last_name.toLowerCase().includes(lowerCaseTerm) ||
+                patient.identification.includes(lowerCaseTerm)
+            );
+        }
+    }
+
+    onPatientChange(selectedPatientId: string) {
+        const selectedPatient = this.patients.find(patient => patient._id === selectedPatientId);
+        if (selectedPatient) {
+            this.appointmentForm.patchValue({
+                patientId: selectedPatientId,  // Guarda el ID del paciente
+                last_name: selectedPatient.last_name,
+                identification: selectedPatient.identification,
+                identification_type_id: selectedPatient.identification_type_id,
+            });
+        }
     }
 }
