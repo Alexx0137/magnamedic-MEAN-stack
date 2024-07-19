@@ -17,6 +17,11 @@ export const routes: Routes = [
         loadComponent: () => import('./components/form/form.component').then(m => m.FormComponent)
 
     },
+    {
+        path: 'profile',
+        loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent)
+
+    }
 
 ]
 

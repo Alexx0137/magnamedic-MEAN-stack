@@ -16,6 +16,7 @@ const PatientSchema = new Schema({
     address: {type:String, require:true},
     telephone: {type:String, require:true},
     email: {type:String, require:true},
+    state: {type:String, require:true},
 });
 
 module.exports = mongoose.model('Patient', PatientSchema)

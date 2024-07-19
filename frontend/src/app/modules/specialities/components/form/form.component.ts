@@ -49,6 +49,7 @@ export class FormComponent implements OnInit {
         this.specialityForm = this.formBuilder.group({
             code: ['', Validators.required],
             name: ['', Validators.required],
+            consulting_room: ['', Validators.required],
         });
     }
 
@@ -71,8 +72,28 @@ export class FormComponent implements OnInit {
         if (this.isEditMode) {
             this.updateSpeciality(formData);
         } else {
-            this.createSpeciality(formData);
+            this.checkCodeExists(formData.code).subscribe(exist => {
+                if (exist) {
+                    this.toastr.error('Ya existe el código en la base de datos.', 'Error');
+                } else {
+                    this.createSpeciality(formData);
+                }
+            }, error => {
+                console.error('Error al verificar el código:', error);
+                this.toastr.error('Ocurrió un error al verificar el código.', 'Error');
+            });
         }
+    }
+
+    /**
+     * Verifica si un código ya existe en el sistema.
+     *
+     * @param {number} code - Código de la especialidad
+     * @returns Observable que emite true si el código existe, false en caso contrario
+     * @author Nelson García
+     */
+    checkCodeExists(code: number) {
+        return this.specialityService.checkSpecialityCodeExists(code);
     }
 
     getSpeciality() {

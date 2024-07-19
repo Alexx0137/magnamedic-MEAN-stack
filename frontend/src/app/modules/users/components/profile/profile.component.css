@@ -1,0 +1,26 @@
+.card-body ul.list-unstyled li {
+    padding: 0.5rem 0;
+    margin: 0;
+}
+
+.card-body ul.list-unstyled li:last-child {
+    border-bottom: none; /* Elimina el borde en el último elemento */
+}
+/* styles.css o el archivo CSS correspondiente */
+.card-body .row {
+    margin-bottom: 0.5rem; /* Espaciado entre filas */
+}
+
+.card-body .col-3 {
+    font-weight: bold; /* Resalta las etiquetas */
+}
+
+.card-body .col-9 {
+    padding-left: 0; /* Espaciado entre etiqueta y valor */
+}
+
+.description-text {
+    background-color: #ffff;
+    color: #5a5c69;
+}
+

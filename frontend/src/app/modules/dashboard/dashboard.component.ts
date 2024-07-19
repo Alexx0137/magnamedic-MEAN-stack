@@ -1,35 +1,58 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink, RouterOutlet} from "@angular/router";
-import {DashboardService} from "./services/dashboard.service";
+import {ReportsService} from "../reports/services/reports.service";
+import {NgForOf} from "@angular/common";
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     imports: [
         RouterOutlet,
-        RouterLink
+        RouterLink,
+        NgForOf
     ],
     templateUrl: './dashboard.component.html',
-    styleUrl: './dashboard.component.css'
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+
     totalAppointments: number = 0;
-    attendedAppointments: number = 0;
-    pendingAppointments: number = 0;
-    cancelledAppointments: number = 0;
+    totalAttended: number = 0;
+    totalPending: number = 0;
+    totalCanceled: number = 0;
 
-    constructor(private dashboardService: DashboardService) { }
+    attendedPercentage: number = 0;
+    canceledPercentage: number = 0;
+    pendingPercentage: number = 0;
 
-    ngOnInit(): void {
-        // this.loadStats();
+    constructor(
+        private reportService: ReportsService) {
     }
 
-    loadStats(): void {
-        this.dashboardService.getAppointmentStats().subscribe((data: any) => {
+    ngOnInit(): void {
+        this.loadReports();
+    }
+
+    /**
+     * Carga los datos de los reportes desde el servicio.
+     */
+    loadReports(): void {
+        this.reportService.getReports().subscribe(data => {
             this.totalAppointments = data.totalAppointments;
-            this.attendedAppointments = data.attendedAppointments;
-            this.pendingAppointments = data.pendingAppointments;
-            this.cancelledAppointments = data.cancelledAppointments;
+            this.totalAttended = data.medicalAppointments.reduce((sum: number, item: any) => sum + item.attended, 0);
+            this.totalCanceled = data.medicalAppointments.reduce((sum: number, item: any) => sum + item.cancelled, 0);
+            this.totalPending = this.totalAppointments - this.totalAttended - this.totalCanceled;
+
+            this.calculatePercentages();
         });
+    }
+
+    /**
+     * Calcula los porcentajes de citas atendidas, canceladas y pendientes.
+     */
+    calculatePercentages(): void {
+        this.attendedPercentage = this.totalAppointments ? (this.totalAttended / this.totalAppointments) * 100 : 0;
+        this.canceledPercentage = this.totalAppointments ? (this.totalCanceled / this.totalAppointments) * 100 : 0;
+        this.pendingPercentage = this.totalAppointments ? (this.totalPending / this.totalAppointments) * 100 : 0;
     }
 }

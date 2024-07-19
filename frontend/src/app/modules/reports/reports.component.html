@@ -1,0 +1,85 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-sm-flex align-items-center justify-content-between mb-2">
+            <h1 class="h3 mb-0 text-gray-800">Reportes</h1>
+        </div>
+    </div>
+    <div class="card-body">
+        <div *ngIf="isLoading" class="loading">Cargando...</div>
+        <div *ngIf="!isLoading">
+            <h2>Citas Médicas</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Especialidad</th>
+                    <th>Total Citas</th>
+                    <th>Citas Atendidas</th>
+                    <th>Citas Pendientes</th>
+                    <th>Citas Canceladas</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let report of reportData.medicalAppointments">
+                    <td>{{ report.speciality }}</td>
+                    <td>{{ report.total }}</td>
+                    <td>{{ report.attended }}</td>
+                    <td>{{ report.pending }}</td>
+                    <td>{{ report.cancelled }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>Pacientes</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Total Pacientes</th>
+                    <th>Activos</th>
+                    <th>Inactivos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ reportData.totalPatients }}</td>
+                    <td>{{ reportData.activePatients }}</td>
+                    <td>{{ reportData.inactivePatients }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>Médicos</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Total Médicos</th>
+                    <th>Activos</th>
+                    <th>Inactivos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ reportData.totalDoctors }}</td>
+                    <td>{{ reportData.activeDoctors }}</td>
+                    <td>{{ reportData.inactiveDoctors }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>Especialidades Médicas</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Especialidad</th>
+                    <th>Médicos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let report of reportData.doctorsBySpeciality">
+                    <td>{{ report.speciality }}</td>
+                    <td>{{ report.totalDoctors }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

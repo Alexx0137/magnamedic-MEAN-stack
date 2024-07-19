@@ -10,10 +10,10 @@
     </div>
 
     <div class="card-body">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Buscar...">
-            <button class="search-button">Buscar</button>
-        </div>
+<!--        <div class="search-container">-->
+<!--            <input type="text" class="search-input" placeholder="Buscar...">-->
+<!--            <button class="search-button">Buscar</button>-->
+<!--        </div>-->
         <div class="table-responsive">
             <table class="styled-table">
                 <thead>
@@ -22,7 +22,6 @@
                     <th>Nombres</th>
                     <th>Teléfono</th>
                     <th>Correo</th>
-<!--                    <th>Dirección</th>-->
                     <th>Acciones</th>
                 </tr>
                 </thead>
@@ -35,28 +34,27 @@
                     <td>{{ patient.name }} {{ patient.last_name }}</td>
                     <td>{{ patient.telephone }}</td>
                     <td>{{ patient.email }}</td>
-<!--                    <td>{{ patient.address }}</td>-->
                     <td>
                         <a [routerLink]="['/patients/history/', patient._id]"
-                           class="btn btn-historial btn-sm me-1"
+                           class="btn-history btn-sm me-3"
                            title="Historial">
-                            <i class="fas fa-history fa-sm"></i>
+                            Historial
                         </a>
                         <a [routerLink]="['/patients/form/', patient._id ]"
-                           class="btn btn-warning btn-sm me-1"
+                           class="icon-color btn btn-bg-light btn-sm btn-active-color-primary me-3"
                            title="Editar">
                             <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeletePatient(patient)"
-                                class="btn btn-danger btn-sm"
+                                class="icon-color btn btn-bg-light btn-active-color-danger btn-sm"
                                 title="Eliminar">
                             <i class="fas fa-trash fa-sm"></i>
                         </button>
                     </td>
                 </tr>
                 <tr *ngIf="!patients.length">
-                    <td colspan="6" class="text-center">No hay pacientes para mostrar</td>
+                    <td colspan="5" class="text-center">No hay pacientes para mostrar</td>
                 </tr>
                 </tbody>
             </table>

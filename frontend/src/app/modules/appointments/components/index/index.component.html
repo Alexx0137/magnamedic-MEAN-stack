@@ -23,6 +23,7 @@
                     <th>Paciente</th>
                     <th>Especialidad</th>
                     <th>Médico</th>
+                    <th>Consultorio</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -35,32 +36,34 @@
                     <td>{{ appointment.date | date: 'dd/MM/yyy' }}</td>
                     <td> {{ appointment.time }}</td>
                     <td>{{ getPatientName(appointment.patient_id) }}</td>
-                    <td>{{ getSpecialityName(appointment.speciality_id) }}</td>
+                    <td>{{ getSpeciality(appointment.speciality_id).name }}</td>
                     <td>{{ getDoctorName(appointment.doctor_id) }}</td>
+                    <td>{{ getSpeciality(appointment.speciality_id).consulting_room }}</td>
                     <td>
                         <span [ngClass]="{
-                            'bg-warning': appointment.state === 1,
-                            'bg-success': appointment.state === 0
+                            'bg-warning border-warning': appointment.state === 1,
+                            'bg-success border-success': appointment.state === 2,
+                            'bg-danger border-danger': appointment.state === 3
                         }" class="text-white px-2 py-1 rounded">
-                            {{ appointment.state === 1 ? 'Pendiente' : 'Atendida' }}
+                            {{ getAppointmentState(appointment.state) }}
                         </span>
                     </td>
                     <td>
                         <a [routerLink]="['/appointments/form/', appointment._id ]"
-                           class="btn btn-warning btn-sm me-1"
+                           class="icon-color btn btn-bg-light btn-sm btn-active-color-primary me-3"
                            title="Editar">
                             <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteAppointment(appointment)"
-                                class="btn btn-danger btn-sm"
+                                class="icon-color btn btn-bg-light btn-active-color-danger btn-sm"
                                 title="Eliminar">
                             <i class="fas fa-trash fa-sm"></i>
                         </button>
                     </td>
                 </tr>
                 <tr *ngIf="!appointments.length">
-                    <td colspan="6" class="text-center">No hay citas médicas para mostrar</td>
+                    <td colspan="8" class="text-center">No hay citas médicas para mostrar</td>
                 </tr>
                 </tbody>
             </table>

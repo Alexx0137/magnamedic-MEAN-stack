@@ -32,6 +32,7 @@ export class FormComponent implements OnInit {
     public id: any = null;
     isEditMode = false;
     doctors: any[] = [];
+    filteredDoctors: any[] = [];
     specialities: any[] = [];
     patients: any[] = [];
     filteredPatients: any[] = [];
@@ -58,7 +59,7 @@ export class FormComponent implements OnInit {
         this.filteredPatients = this.patients;
 
         const today = new Date();
-        this.minDate = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        this.minDate = today.toISOString().split('T')[0];
 
         this.route.paramMap.subscribe(params => {
             this.id = params.get('id');
@@ -88,8 +89,8 @@ export class FormComponent implements OnInit {
 
         const [hours, minutes] = time.split(':').map(Number);
         const timeValue = hours * 60 + minutes;
-        const minTimeValue = 7 * 60; // 7:00 AM in minutes
-        const maxTimeValue = 18 * 60; // 6:00 PM in minutes
+        const minTimeValue = 7 * 60;
+        const maxTimeValue = 18 * 60;
 
         if (timeValue < minTimeValue || timeValue > maxTimeValue) {
             return { outOfRange: true };
@@ -164,28 +165,16 @@ export class FormComponent implements OnInit {
         });
     }
 
-    getAppointmentState(state: string): string {
-        return state === '1' ? 'Pendiente' : 'Atendida';
-    }
-
-    filterPatients(searchTerm: string) {
-        if (!searchTerm) {
-            this.filteredPatients = this.patients;
-        } else {
-            const lowerCaseTerm = searchTerm.toLowerCase();
-            this.filteredPatients = this.patients.filter(patient =>
-                patient.name.toLowerCase().includes(lowerCaseTerm) ||
-                patient.last_name.toLowerCase().includes(lowerCaseTerm) ||
-                patient.identification.includes(lowerCaseTerm)
-            );
-        }
+    onSpecialityChange(event: any) {
+        const selectedSpecialityId = event.target.value;
+        this.filteredDoctors = this.doctors.filter(doctor => doctor.speciality_id === selectedSpecialityId);
     }
 
     onPatientChange(selectedPatientId: string) {
         const selectedPatient = this.patients.find(patient => patient._id === selectedPatientId);
         if (selectedPatient) {
             this.appointmentForm.patchValue({
-                patientId: selectedPatientId,  // Guarda el ID del paciente
+                patient_id: selectedPatientId,  // Guarda el ID del paciente
                 last_name: selectedPatient.last_name,
                 identification: selectedPatient.identification,
                 identification_type_id: selectedPatient.identification_type_id,

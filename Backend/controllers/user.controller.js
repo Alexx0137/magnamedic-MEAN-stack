@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const userCtrl = {};
 const bcrypt = require('bcrypt');
+const Patient = require("../models/patient");
 
 
 /**
@@ -83,10 +84,17 @@ userCtrl.updateUser = async (req, res) => {
         if (!id || id === 'null') {
             return res.status(400).json({ error: 'Invalid user ID' });
         }
+
         const user = await User.findById(id);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
+
+        if (req.body.password) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            req.body.password = hashedPassword;
+        }
+
         Object.assign(user, req.body);
         const updatedUser = await user.save();
 
@@ -102,6 +110,7 @@ userCtrl.updateUser = async (req, res) => {
         });
     }
 };
+
 
 /**
  * Eliminar un usuario por ID.
@@ -124,5 +133,11 @@ userCtrl.deleteUser = async (req, res) => {
         });
     }
 };
+
+userCtrl.verificationUser = async (req, res) => {
+    const { identification } = req.params;
+    const user = await User.findOne({ identification });
+    res.send(!!user);
+}
 
 module.exports = userCtrl;

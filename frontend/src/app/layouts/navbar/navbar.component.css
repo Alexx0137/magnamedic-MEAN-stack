@@ -17,13 +17,8 @@
     align-items: center;
 }
 
-.user-profile {
-    padding: 0 12px;
-}
-
-
 .user-profile span {
-    font-size: 80%;
+    font-size: 13px;
     font-weight: 400;
 }
 
@@ -43,12 +38,90 @@ a {
     margin-left: 10px;
 }
 
-.dashboard-navbar .user-profile {
-    font-weight: bold;
-    font-size: 16px;
+.user-profile {
+    display: flex;
+    align-items: center;
 }
 
 .container-fluid {
     padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-right: 1rem;
+}
+.user-role {
+    font-weight: bold!important;
+    font-size: 0.7rem!important;
+}
+
+.role-drop {
+    color: #50CD89;
+}
+.dropdown-menu {
+    min-width: 200px;
+    margin: 0;
+    padding: 13px 0;
+}
+
+.dropdown-menu .d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu .d-flex img {
+    width: 32px; /* Ajusta el tamaño según tu diseño */
+    height: 32px;
+}
+
+.dropdown-menu .role-drop {
+    margin-top: 0.25rem;
+}
+
+.dropdown-menu .text-gray-600 {
+    display: flex;
+    align-items: center;
+}
+.drop-info{
+    padding: 0.65rem 1rem;
+}
+
+/* Puedes agregar estos estilos en tu archivo CSS o SCSS */
+
+.user-profile .img-profile {
+    width: 40px; /* Ajusta el tamaño según tu diseño */
+    height: 40px;
+}
+
+.dropdown-menu .fas {
+    font-size: 1.5rem; /* Ajusta el tamaño del ícono según tu diseño */
+}
+
+.icon-container {
+    font-size: 1.5rem; /* Ajusta el tamaño del icono según sea necesario */
+    color: #6c757d; /* Color del icono */
+    margin-right: 0.5rem; /* Espacio entre el icono y el texto */
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-item i {
+    font-size: 1rem!important; /* Ajusta el tamaño del icono de cierre de sesión */
+    color: #6c757d; /* Color del icono */
+}
+
+.text-drop-user {
+    font-size: 15px!important;
+}
+.text-drop-email {
+    font-size: 12px!important;
+    color: #A1A5B7;
+}
+.text-drop-logout {
+    font-size: 14px!important;
+    color: #7e8299
+}
+
+.dropdown-menu .fas {
+    font-size: 1.5rem; /* Ajusta el tamaño del ícono según tu diseño */
 }

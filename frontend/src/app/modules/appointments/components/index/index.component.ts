@@ -53,9 +53,10 @@ export class IndexComponent implements OnInit {
     /**
      * Obtiene la lista de citas médicas del servicio.
      */
-    getAppointments(){
+    getAppointments() {
         this.appointmentService.getAppointments().subscribe((data) => {
             this.appointments = data;
+            this.appointments.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
             this.isLoading = false;
         });
     }
@@ -80,19 +81,23 @@ export class IndexComponent implements OnInit {
      * @param appointment La cita médica a eliminar.
      */
     questionDeleteAppointment(appointment: any) {
+        const patientName = this.getPatientName(appointment.patient_id); // Cambia patient_id según tu estructura
+        const specialityName = this.getSpeciality(appointment.speciality_id).name;
+
         Swal.fire({
             title: '¿Eliminar?',
-            text: `¿Está seguro de eliminar la cita médica ${appointment.name}?`,
+            text: `¿Está seguro de eliminar la cita médica de ${patientName} con ${specialityName}?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Sí, eliminar',
             cancelButtonText: 'No, cancelar'
         }).then((result) => {
-            if (result.value) {
+            if (result.isConfirmed) {
                 this.deleteAppointment(appointment._id);
             }
         });
     }
+
 
     loadDoctors() {
         this.doctorService.getDoctors().subscribe((data: any[]) => {
@@ -106,6 +111,16 @@ export class IndexComponent implements OnInit {
         });
     }
 
+
+    getSpeciality(specialityId: string): { name: string; consulting_room: string } {
+        const speciality = this.specialities.find(s => s._id === specialityId);
+        if (!speciality) {
+        }
+        return speciality
+            ? { name: speciality.name, consulting_room: speciality.consulting_room }
+            : { name: 'Desconocida', consulting_room: 'Desconocida' };
+    }
+
     loadPatients() {
         this.patientService.getPatients().subscribe((data: any[]) => {
             this.patients = data;
@@ -117,13 +132,24 @@ export class IndexComponent implements OnInit {
         return doctor ? `${doctor.name} ${doctor.last_name}` : 'Desconocido';
     }
 
-    getSpecialityName(specialityId: string): string {
-        const speciality = this.specialities.find(s => s._id === specialityId);
-        return speciality ? speciality.name : 'Desconocida';
-    }
+
 
     getPatientName(patientId: string): string {
         const patient = this.patients.find(s => s._id === patientId);
         return patient ? patient.name : 'Desconocida';
     }
+
+    getAppointmentState(state: number): string {
+        switch (state) {
+            case 1:
+                return 'Pendiente';
+            case 2:
+                return 'Atendida';
+            case 3:
+                return 'Cancelada';
+            default:
+                return 'Desconocido';
+        }
+    }
+
 }

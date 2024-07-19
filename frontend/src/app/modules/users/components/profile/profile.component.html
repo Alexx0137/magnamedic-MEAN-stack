@@ -1,0 +1,68 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="d-sm-flex align-items-center justify-content-between mb-2">
+            <h1 class="h3 mb-0 text-gray-800">Perfil de Usuario</h1>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="text-center mb-5">
+            <img src="/assets/media/images/user-profile.png" alt="User Avatar" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+        </div>
+
+        <div *ngIf="user">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-3 text-drop-user text-gray-800 fw-bold">
+                            <strong>Nombres:</strong>
+                        </div>
+                        <div class="col-9 description-text">
+                            {{ user.name }} {{ user.last_name }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-3 text-drop-user text-gray-800 fw-bold">
+                            <strong>Identificación:</strong>
+                        </div>
+                        <div class="col-9 description-text">
+                            {{ user.identification }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-3 text-drop-user text-gray-800 fw-bold">
+                            <strong>Email:</strong>
+                        </div>
+                        <div class="col-9 description-text">
+                            {{ user.email }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-3 text-drop-user text-gray-800 fw-bold">
+                            <strong>Rol:</strong>
+                        </div>
+                        <div class="col-9 description-text">
+                            {{ getRoleName(user.role) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a [routerLink]="['/users/form/', user._id]"
+               class="btn btn-warning btn-sm mt-4"
+               title="Editar Perfil">
+                <i class="fas fa-edit fa-sm"></i> Editar
+            </a>
+        </div>
+
+        <div *ngIf="!user">
+            <p>Cargando perfil...</p>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 const Speciality = require('../models/speciality');
+const Patient = require("../models/patient");
 const specialityCtrl = {};
 
 
@@ -122,5 +123,12 @@ specialityCtrl.deleteSpeciality = async (req, res) => {
         });
     }
 };
+
+specialityCtrl.verificationSpeciality = async (req, res) => {
+    const { code } = req.params;
+    const speciality = await Speciality.findOne({ code });
+    res.send(!!speciality)
+}
+
 
 module.exports = specialityCtrl;

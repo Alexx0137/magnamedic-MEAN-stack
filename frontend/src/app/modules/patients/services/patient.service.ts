@@ -82,5 +82,4 @@ export class PatientService {
     checkPatientExists(identification: number): Observable<boolean> {
         return this.http.get<boolean>(this.URL_API +`/exist/${identification}`);
     }
-
 }

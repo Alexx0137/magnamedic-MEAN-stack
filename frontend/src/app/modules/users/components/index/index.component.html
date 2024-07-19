@@ -33,16 +33,20 @@
                     <td>{{ user.name }} {{ user.last_name }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ getRoleName(user.role) }}</td>
-                    <td>{{ user.state ? 'Activo' : 'Inactivo' }}</td>
+                    <td>
+                        <span [ngClass]="{ 'badge-light-success': user.state, 'badge-light-danger': !user.state }">
+                            {{ user.state ? 'Activo' : 'Inactivo' }}
+                        </span>
+                    </td>
                     <td>
                         <a [routerLink]="['/users/form/', user._id ]"
-                           class="btn btn-warning btn-sm me-1"
+                           class="icon-color btn btn-bg-light btn-sm btn-active-color-primary me-3"
                            title="Editar">
                             <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteUser(user)"
-                                class="btn btn-danger btn-sm"
+                                class="icon-color btn btn-bg-light btn-active-color-danger btn-sm"
                                 title="Eliminar">
                             <i class="fas fa-trash fa-sm"></i>
                         </button>

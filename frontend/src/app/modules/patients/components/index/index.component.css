@@ -1,101 +1,17 @@
-@media (max-width: 576px) {
-    .table-responsive-sm {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-}
-
-@media (max-width: 768px) {
-    .table-responsive-md {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-}
-
-@media (max-width: 992px) {
-    .table-responsive-lg {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-}
-
-@media (max-width: 1600px) {
-    .table-responsive-xl {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-}
-
-.styled-table {
-    width: 100%;
-    margin: 0 auto;
-    border-collapse: collapse;
-}
-
-.styled-table th, .styled-table td {
-    border: 1px solid #e3e3e3;
-    padding: 8px;
-    text-align: center;
-}
-
-td {
-    color: #5a5c69;
-}
-
-.styled-table th {
-    background-color: #ffff;
-    color: #1a202c;
-}
-
-.styled-table thead tr {
-    border-bottom: 3px solid #e3e3e3;
-}
-
-
-.btn-warning {
-    color: #ffff;
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-
-.btn-warning:hover {
-    color: #ffff;
-    background-color: #ffca2c;
-    border-color: #ffca2c;
-}
-
-
-.btn-danger {
-    color: #fff;
-    background-color: #d52a1a;
-    border-color: #d52a1a;
-}
-
-.btn-danger:hover {
-    color: #fff;
-    background-color: #e02d1b;
-    border-color: #e02d1b;
-}
-
-.btn-historial {
-    background-color: green;
+.btn-history {
+    background-color: #50CD89;
     color: white;
+    border-radius: 5px!important;
+    font-size: 13px;
+    padding: 4px;
 }
 
-.btn-historial:hover {
+.btn-history:hover {
     background-color: darkgreen;
 }
 
 .icon-sm {
-    font-size: 0.75em; /* Ajusta el tamaño según tus necesidades */
+    font-size: 0.75em;
 }
 
 .btn-transparent {

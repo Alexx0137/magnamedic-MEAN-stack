@@ -69,4 +69,17 @@ export class HistoryComponent implements OnInit {
         const doctor = this.doctors.find(d => d._id === doctorId);
         return doctor ? `${doctor.name} ${doctor.last_name}` : 'Desconocido';
     }
+
+    getAppointmentState(state: number): string {
+        switch (state) {
+            case 1:
+                return 'Pendiente';
+            case 2:
+                return 'Atendida';
+            case 3:
+                return 'Cancelada';
+            default:
+                return 'Desconocido';
+        }
+    }
 }

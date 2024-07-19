@@ -31,7 +31,11 @@ const Routing: Routes = [
         loadChildren: () => import('../specialities/specialities.routes').then(m => m.default),
         canActivate: [authGuard]
     },
-
+    {
+        path: 'reports',
+        loadChildren: () => import('../reports/reports.routes').then(m => m.default),
+        canActivate: [authGuard]
+    },
     {
         path: '**',
         redirectTo: 'error/404',

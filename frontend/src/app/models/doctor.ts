@@ -11,7 +11,8 @@ export class Doctor {
         public _telephone: string = "",
         public _email: string = "",
         public _speciality_id: string = "",
-        public _professional_card: string = ""
+        public _professional_card: string = "",
+        public state: boolean
 
     ) { }
 }

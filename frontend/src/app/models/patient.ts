@@ -9,6 +9,7 @@ export class Patient {
         public genderId: number = 0,
         public address: string = "",
         public telephone: string = "",
-        public email: string = ""
+        public email: string = "",
+        public state: boolean
     ) { }
 }

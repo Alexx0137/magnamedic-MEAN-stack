@@ -84,6 +84,7 @@ export class FormComponent implements OnInit {
             speciality_id: ['', [Validators.required]],
             professional_card: ['', [Validators.required]],
             birth_date: [null],
+            state: [true, [Validators.required]],
         });
     }
 

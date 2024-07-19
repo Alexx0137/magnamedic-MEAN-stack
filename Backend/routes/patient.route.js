@@ -7,6 +7,7 @@ router.post('/', patientCtrl.createPatient);
 router.get('/:id', patientCtrl.getPatient);
 router.put('/:id', patientCtrl.editarPatient);
 router.delete('/:id', patientCtrl.eliminarPatient);
+
 router.get('/exist/:identification', patientCtrl.verificationPatient);
 
 module.exports = router;

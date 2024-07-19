@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import Swal from 'sweetalert2';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {ToastrService} from 'ngx-toastr';
 import {User} from "../../../../models/user";
@@ -12,7 +12,8 @@ import {User} from "../../../../models/user";
     imports: [
         NgForOf,
         NgIf,
-        RouterLink
+        RouterLink,
+        NgClass
     ],
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.css']

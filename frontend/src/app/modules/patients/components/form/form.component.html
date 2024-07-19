@@ -31,9 +31,9 @@
                                 formControlName="identification_type_id"
                         >
                             <option value="" disabled selected>Seleccione una opción</option>
-                            <option value="1">Registro civil</option>
-                            <option value="2">Tarjeta de identidad</option>
-                            <option value="3">Cédula de ciudadanía</option>
+                            <option value="1">Cédula de ciudadanía</option>
+                            <option value="2">Pasaporte</option>
+                            <option value="3">Cédula de extranjería</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
@@ -126,6 +126,21 @@
                                class="form-control"
                                formControlName="birth_date"
                         >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Estado:</label>
+                        <div>
+                            <label class="form-check-label radius-state">
+                                <input type="radio" name="state" class="form-check-input" formControlName="state"
+                                       [value]="true">
+                                Activo
+                            </label>
+                            <label class="form-check-label">
+                                <input type="radio" name="state" class="form-check-input" formControlName="state"
+                                       [value]="false">
+                                Inactivo
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">

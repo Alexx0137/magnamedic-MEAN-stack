@@ -43,8 +43,7 @@ authCtrl.login = async (req, res) => {
     return res.status(200).json({
         token,
         user: {
-            name: user.name,
-            last_name: user.last_name
+            id: user.id
         }
     });
 };

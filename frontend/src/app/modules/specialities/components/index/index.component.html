@@ -20,6 +20,7 @@
                 <tr>
                     <th style="width: 120px;">Código</th>
                     <th>Nombre</th>
+                    <th>Consultorio</th>
                     <th style="width: 120px;">Acciones</th>
                 </tr>
                 </thead>
@@ -30,15 +31,16 @@
                 <tr *ngFor="let speciality of specialities">
                     <td>{{ speciality.code }}</td>
                     <td>{{ speciality.name }}
+                    <td>{{ speciality.consulting_room }}
                     <td>
                         <a [routerLink]="['/specialities/form/', speciality._id ]"
-                           class="btn btn-warning btn-sm me-1"
+                           class="icon-color btn btn-bg-light btn-sm btn-active-color-primary me-3"
                            title="Editar">
                             <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteSpeciality(speciality)"
-                                class="btn btn-danger btn-sm"
+                                class="icon-color btn btn-bg-light btn-active-color-danger btn-sm"
                                 title="Eliminar">
                             <i class="fas fa-trash fa-sm"></i>
                         </button>

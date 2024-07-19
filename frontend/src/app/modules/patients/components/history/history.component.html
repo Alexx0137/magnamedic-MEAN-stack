@@ -26,14 +26,17 @@
                     <td>{{ getDoctorName(appointment.doctor_id) }}</td>
                     <td>
                         <span [ngClass]="{
-                            'bg-warning': appointment.state === 1,
-                            'bg-success': appointment.state === 0
+                            'bg-warning border-warning': appointment.state === 1,
+                            'bg-success border-success': appointment.state === 2,
+                            'bg-danger border-danger': appointment.state === 3
                         }" class="text-white px-2 py-1 rounded">
-                            {{ appointment.state === 1 ? 'Pendiente' : 'Atendida' }}
+                            {{ getAppointmentState(appointment.state) }}
                         </span>
                     </td>
                     <td>
-                        <a [routerLink]="['/appointments/form/', appointment._id]" class="btn btn-warning btn-sm">
+                        <a [routerLink]="['/appointments/form/', appointment._id]"
+                           class="icon-color btn btn-bg-light btn-sm btn-active-color-primary me-3"
+                            title="Editar">
                             <i class="fas fa-edit fa-sm"></i>
                         </a>
                     </td>

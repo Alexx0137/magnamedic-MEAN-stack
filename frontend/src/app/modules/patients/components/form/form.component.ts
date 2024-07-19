@@ -82,9 +82,16 @@ export class FormComponent implements OnInit {
             telephone: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             birth_date: [null],
+            state: [true, [Validators.required]],
         });
     }
 
+    /**
+     * Crea un nuevo paciente y navega a la lista de pacientes.
+     *
+     * @param {any} data - Datos del paciente a crear
+     * @author Nelson García
+     */
     createPatient(data: any): void {
         this.patientService.createPatient(data)
             .subscribe({
@@ -98,6 +105,10 @@ export class FormComponent implements OnInit {
             });
     }
 
+    /**
+     * Envía el formulario. Crea o actualiza el paciente según el modo.
+     * @author Nelson García
+     */
     submit() {
         const formData = this.patientForm.value;
 
@@ -117,16 +128,24 @@ export class FormComponent implements OnInit {
         }
     }
 
+    /**
+     * Verifica si un paciente ya existe en el sistema.
+     *
+     * @param {number} identification - Número de identificación del paciente
+     * @returns Observable que emite true si el paciente existe, false en caso contrario
+     * @author Nelson García
+     */
     checkPatientExists(identification: number) {
         return this.patientService.checkPatientExists(identification);
     }
 
-
-
+    /**
+     * Obtiene los datos de un paciente específico y los carga en el formulario.
+     * @author Nelson García
+     */
     getPatient() {
         this.patientService.showPatient(this.id)
             .subscribe(response => {
-                console.log("paciente", response);
                 if (response.birth_date) {
                     response.birth_date = response.birth_date.slice(0, 10);
                 }
@@ -134,6 +153,12 @@ export class FormComponent implements OnInit {
             });
     }
 
+    /**
+     * Actualiza un paciente existente.
+     *
+     * @param {any} form_value - Datos del paciente a actualizar
+     * @author Nelson García
+     */
     updatePatient(form_value: any) {
         form_value._method = 'PUT';
 

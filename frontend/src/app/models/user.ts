@@ -8,21 +8,7 @@ export class User {
         public email: string,
         public password: string,
         public role: string,
-        public state: boolean
+        public state: number
     ) {
     }
 }
-
-// const { Schema, model } = require('mongoose');
-//
-// const userSchema = new Schema({
-//     id: String,
-//     documentTypeId: Number,
-//     identification: String,
-//     name: String,
-//     lastName: String,
-//     email: String,
-//     password: String,
-//     role: String
-// });
-// module.exports = model('User', userSchema, 'users');

@@ -53,9 +53,10 @@ export class FormComponent implements OnInit {
             identification_type_id: ['', Validators.required],
             identification: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required]],
+            password: ['', this.isEditMode ? Validators.required : null],
+            confirmPassword: ['', this.isEditMode ? Validators.required : null],
             role: ['', [Validators.required]],
-            state: [true, [Validators.required]],
+            state: [1, [Validators.required]],
         });
     }
 
@@ -75,21 +76,51 @@ export class FormComponent implements OnInit {
     submit() {
         const formData = this.userForm.value;
 
+        if (!this.isEditMode && formData.password !== formData.confirmPassword) {
+            this.toastr.error('Las contraseñas no coinciden', 'Error');
+            return;
+        }
+        if (this.isEditMode) {
+            delete formData.password;
+            delete formData.confirmPassword;
+        }
         if (this.isEditMode) {
             this.updateUser(formData);
         } else {
+            this.checkUserExists(formData.identification).subscribe(exists => {
+                if (exists) {
+                    this.toastr.error('Ya existe un usuario con ese número de documento.', 'Error');
+                } else {
             this.createUser(formData);
+                }
+            }, error => {
+                console.error('Error al verificar el usuario:', error);
+                this.toastr.error('Ocurrió un error al verificar el paciente.', 'Error');
+            });
         }
     }
+
+    /**
+     * Verifica si un usuario ya existe en el sistema.
+     *
+     * @param {number} identification - Número de identificación del usuario
+     * @returns Observable que emite true si el usuario existe, false en caso contrario
+     * @author Nelson García
+     */
+    checkUserExists(identification: number) {
+        return this.userService.checkUserExists(identification);
+    }
+
 
     getUser() {
         this.userService.showUser(this.id)
             .subscribe(response => {
-                console.log("usuario", response);
-                response.state = response.state === 'true';
-                this.userForm.patchValue(response);
+                // No incluir password en el patchValue
+                const { password, ...userData } = response;
+                this.userForm.patchValue(userData);
             });
     }
+
 
 
     updateUser(form_value: any) {

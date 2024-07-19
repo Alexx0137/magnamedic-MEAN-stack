@@ -78,4 +78,13 @@ export class SpecialityService {
     deleteSpeciality(_id: string): Observable<SpecialityResponse> {
         return this.http.delete<SpecialityResponse>(this.URL_API + `/${_id}`);
     }
+
+    // checkSpecialityExists(code: string, consultingRoom: string): Observable<boolean> {
+    //     return this.http.get<boolean>(this.URL_API + `/exists?code=${code}&consultingRoom=${consultingRoom}`);
+    // }
+
+    checkSpecialityCodeExists(code: number) {
+        return this.http.get<boolean>(this.URL_API + `/exists/${code}`);
+    }
+
 }

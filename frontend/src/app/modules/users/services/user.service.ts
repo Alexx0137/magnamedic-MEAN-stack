@@ -39,7 +39,7 @@ export class UserService {
      * @author Nelson García
      * @param _id
      */
-    showUser(_id: number):Observable<any> {
+    showUser(_id: string): Observable<any> {
         return this.http.get(this.URL_API + `/${_id}`);
     }
 
@@ -78,4 +78,9 @@ export class UserService {
     deleteUser(_id: string): Observable<UserResponse> {
         return this.http.delete<UserResponse>(this.URL_API + `/${_id}`);
     }
+
+    checkUserExists(identification: number): Observable<boolean> {
+        return this.http.get<boolean>(this.URL_API +`/exist/${identification}`);
+    }
+
 }
