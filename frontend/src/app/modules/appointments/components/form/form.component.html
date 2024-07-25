@@ -15,12 +15,13 @@
                         [placeholder]="'Seleccione un paciente'"
                         formControlName="patient_id"
                         (change)="onPatientChange($event)"
-                        [searchable]="true">
+                        [searchable]="true"
+                        data-cy="patient">
                         <ng-template ng-label-tmp let-item="item">
                             {{ item.identification }} - {{ item.name }}
                         </ng-template>
                         <ng-template ng-option-tmp let-item="item">
-                            {{ item.identification }} - {{ item.name }}
+                            {{ item.identification }} - {{ item.name }} {{ item.last_name }}
                         </ng-template>
                     </ng-select>
                 </div>
@@ -29,7 +30,7 @@
                     <select name="state"
                             class="form-control"
                             formControlName="state"
-                    >
+                            data-cy="state">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="1">Pendiente</option>
                         <option value="2">Atendida</option>
@@ -43,7 +44,8 @@
                     <select name="speciality_id"
                             class="form-control"
                             formControlName="speciality_id"
-                            (change)="onSpecialityChange($event)">
+                            (change)="onSpecialityChange($event)"
+                            data-cy="speciality">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option *ngFor="let speciality of specialities"
                                 [value]="speciality._id">
@@ -55,7 +57,8 @@
                     <label>Médico:</label>
                     <select name="doctor_id"
                             class="form-control"
-                            formControlName="doctor_id">
+                            formControlName="doctor_id"
+                            data-cy="doctor">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option *ngFor="let doctor of filteredDoctors"
                                 [value]="doctor._id">
@@ -67,13 +70,18 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Fecha:</label>
-                    <input type="date" formControlName="date" [min]="minDate" class="form-control" required>
+                    <input type="date"
+                           formControlName="date"
+                           [min]="minDate"
+                           class="form-control"
+                           required
+                           data-cy="date">
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>Hora:</label>
                     <input type="time" formControlName="time" [min]="minTime" [max]="maxTime" class="form-control"
-                           required>
+                           required data-cy="time">
                     <div *ngIf="appointmentForm.get('time')?.errors?.['outOfRange']" class="text-danger">
                         La hora debe estar entre las 07:00 y las 18:00.
                     </div>
@@ -87,7 +95,7 @@
                         name="observations"
                         class="form-control"
                         formControlName="observations"
-                    ></textarea>
+                        data-cy="observations"></textarea>
                 </div>
             </div>
             <div class="form-row">
@@ -98,7 +106,8 @@
                     </a>
                     <button class="btn btn-primary btn-sm mt-2 mx-1"
                             [disabled]="appointmentForm.invalid"
-                            (click)="submit()">
+                            (click)="submit()"
+                            data-cy="save">
                         {{ isEditMode ? 'Actualizar' : 'Guardar' }}
                     </button>
                 </div>

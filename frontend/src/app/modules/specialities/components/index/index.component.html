@@ -2,7 +2,7 @@
     <div class="card-header py-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="h3 mb-0 text-gray-800">Especialidades médicas</h1>
-            <a routerLink="/specialities/form" class="btn btn-primary btn-sm btn-icon-split">
+            <a routerLink="/specialities/form" class="btn btn-primary btn-sm btn-icon-split" id="link-form">
                 <i class="fas fa-plus fa-sm"></i>
                 Crear especialidad
             </a>
@@ -35,12 +35,14 @@
                     <td>
                         <a [routerLink]="['/specialities/form/', speciality._id ]"
                            class="icon-color btn btn-bg-light btn-sm btn-active-color-primary me-3"
+                           data-cy="edit-appointment-button"
                            title="Editar">
                             <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteSpeciality(speciality)"
                                 class="icon-color btn btn-bg-light btn-active-color-danger btn-sm"
+                                data-cy="delete-appointment-button"
                                 title="Eliminar">
                             <i class="fas fa-trash fa-sm"></i>
                         </button>

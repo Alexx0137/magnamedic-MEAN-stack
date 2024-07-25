@@ -136,7 +136,7 @@ export class IndexComponent implements OnInit {
 
     getPatientName(patientId: string): string {
         const patient = this.patients.find(s => s._id === patientId);
-        return patient ? patient.name : 'Desconocida';
+        return patient ? `${patient.name} ${patient.last_name}` : 'Desconocido';
     }
 
     getAppointmentState(state: number): string {

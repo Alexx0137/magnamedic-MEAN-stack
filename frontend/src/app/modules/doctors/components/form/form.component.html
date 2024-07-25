@@ -11,6 +11,7 @@
                         <input type="text"
                                name="name"
                                class="form-control"
+                               data-cy="name"
                                formControlName="name"
                         >
                     </div>
@@ -19,6 +20,7 @@
                         <input type="text"
                                name="last_name"
                                class="form-control"
+                               data-cy="last_name"
                                formControlName="last_name"
                         >
                     </div>
@@ -28,6 +30,7 @@
                         <label>Tipo de documento:</label>
                         <select name="identification_type_id"
                                 class="form-control"
+                                data-cy="identification_type_id"
                                 formControlName="identification_type_id"
                         >
                             <option value="" disabled selected>Seleccione una opción</option>
@@ -41,6 +44,7 @@
                         <input type="number"
                                name="identification"
                                class="form-control"
+                               data-cy="identification"
                                formControlName="identification"
                         >
                     </div>
@@ -50,6 +54,7 @@
                         <label>Género:</label>
                         <select name="gender_id"
                                 class="form-control"
+                                data-cy="gender_id"
                                 formControlName="gender_id"
                         >
                             <option value="" disabled selected>Seleccione una opción</option>
@@ -62,6 +67,7 @@
                         <input type="text"
                                name="address"
                                class="form-control"
+                               data-cy="address"
                                formControlName="address"
                         >
                     </div>
@@ -72,6 +78,7 @@
                         <input type="text"
                                name="telephone"
                                class="form-control"
+                               data-cy="telephone"
                                formControlName="telephone"
                         >
                     </div>
@@ -80,6 +87,7 @@
                         <input type="email"
                                name="email"
                                class="form-control"
+                               data-cy="email"
                                formControlName="email"
                         >
                     </div>
@@ -89,6 +97,7 @@
                     <label>Especialidad:</label>
                     <select name="speciality_id"
                             class="form-control"
+                            data-cy="speciality"
                             formControlName="speciality_id"
                     >
                         <option value="" disabled selected>Seleccione una opción</option>
@@ -104,6 +113,7 @@
                     <input type="text"
                            name="professional_card"
                            class="form-control"
+                           data-cy="professional_card"
                            formControlName="professional_card"
                     >
                 </div>
@@ -114,6 +124,7 @@
                         <input type="date"
                                name="birth_date"
                                class="form-control"
+                               data-cy="date"
                                formControlName="birth_date"
                         >
                     </div>
@@ -121,7 +132,7 @@
                         <label>Estado:</label>
                         <div>
                             <label class="form-check-label radius-state">
-                                <input type="radio" name="state" class="form-check-input" formControlName="state"
+                                <input type="radio" name="state" class="form-check-input" formControlName="state" data-cy="state"
                                        [value]="true">
                                 Activo
                             </label>
@@ -141,6 +152,7 @@
                         </a>
                         <button class="btn btn-primary btn-sm mt-2 mx-1"
                                 [disabled]="doctorForm.invalid"
+                                data-cy="save"
                                 (click)="submit()">
                             {{ isEditMode ? 'Actualizar' : 'Guardar' }}
                         </button>

@@ -11,6 +11,7 @@
                         <input type="text"
                                name="name"
                                class="form-control"
+                               data-cy="name"
                                formControlName="name"
                         >
                     </div>
@@ -19,6 +20,7 @@
                         <input type="text"
                                name="last_name"
                                class="form-control"
+                               data-cy="last_name"
                                formControlName="last_name"
                         >
                     </div>
@@ -28,6 +30,7 @@
                         <label>Tipo de documento:</label>
                         <select name="identification_type_id"
                                 class="form-control"
+                                data-cy="identification_type_id"
                                 formControlName="identification_type_id"
                         >
                             <option value="" disabled selected>Seleccione una opción</option>
@@ -38,9 +41,10 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label>Número de documento:</label>
-                        <input type="number"
+                        <input type="text"
                                name="identification"
                                class="form-control"
+                               data-cy="identification"
                                formControlName="identification"
                         >
                     </div>
@@ -50,6 +54,7 @@
                         <label>Género:</label>
                         <select name="gender_id"
                                 class="form-control"
+                                data-cy="gender_id"
                                 formControlName="gender_id"
                         >
                             <option value="" disabled selected>Seleccione una opción</option>
@@ -61,6 +66,7 @@
                         <label>RH:</label>
                         <select name="blood_type_id"
                                 class="form-control"
+                                data-cy="blood_type_id"
                                 formControlName="blood_type_id"
                         >
                             <option value="" disabled selected>Seleccione una opción</option>
@@ -80,6 +86,7 @@
                         <label>EPS:</label>
                         <select name="eps"
                                 class="form-control"
+                                data-cy="eps"
                                 formControlName="eps"
                         >
                             <option value="" disabled selected>Seleccione una opción</option>
@@ -96,6 +103,7 @@
                         <input type="text"
                                name="address"
                                class="form-control"
+                               data-cy="address"
                                formControlName="address"
                         >
                     </div>
@@ -106,6 +114,7 @@
                         <input type="text"
                                name="telephone"
                                class="form-control"
+                               data-cy="telephone"
                                formControlName="telephone"
                         >
                     </div>
@@ -114,6 +123,7 @@
                         <input type="email"
                                name="email"
                                class="form-control"
+                               data-cy="email"
                                formControlName="email"
                         >
                     </div>
@@ -124,6 +134,7 @@
                         <input type="date"
                                name="birth_date"
                                class="form-control"
+                               data-cy="date"
                                formControlName="birth_date"
                         >
                     </div>
@@ -131,7 +142,7 @@
                         <label>Estado:</label>
                         <div>
                             <label class="form-check-label radius-state">
-                                <input type="radio" name="state" class="form-check-input" formControlName="state"
+                                <input type="radio" name="state" class="form-check-input" formControlName="state" data-cy="state"
                                        [value]="true">
                                 Activo
                             </label>
@@ -149,7 +160,8 @@
                             <i class="fas fa-fw fa-arrow-left"></i>
                             Cancelar
                         </a>
-                        <button class="btn btn-primary btn-sm mt-2 mx-1"
+                        <button class="submit btn btn-primary btn-sm mt-2 mx-1"
+                                data-cy="save"
                                 [disabled]="patientForm.invalid"
                                 (click)="submit()">
                             {{ isEditMode ? 'Actualizar' : 'Guardar' }}

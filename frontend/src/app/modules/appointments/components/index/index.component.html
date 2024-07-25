@@ -2,7 +2,7 @@
     <div class="card-header py-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h1 class="h3 mb-0 text-gray-800">Citas médicas</h1>
-            <a routerLink="/appointments/form" class="btn btn-primary btn-sm btn-icon-split">
+            <a routerLink="/appointments/form" class="btn btn-primary btn-sm btn-icon-split" id="link-form">
                 <i class="fas fa-plus fa-sm"></i>
                 Crear cita médica
             </a>
@@ -35,7 +35,7 @@
                 <tr *ngFor="let appointment of appointments">
                     <td>{{ appointment.date | date: 'dd/MM/yyy' }}</td>
                     <td> {{ appointment.time }}</td>
-                    <td>{{ getPatientName(appointment.patient_id) }}</td>
+                    <td>{{ getPatientName(appointment.patient_id.name) }}</td>
                     <td>{{ getSpeciality(appointment.speciality_id).name }}</td>
                     <td>{{ getDoctorName(appointment.doctor_id) }}</td>
                     <td>{{ getSpeciality(appointment.speciality_id).consulting_room }}</td>
@@ -51,12 +51,14 @@
                     <td>
                         <a [routerLink]="['/appointments/form/', appointment._id ]"
                            class="icon-color btn btn-bg-light btn-sm btn-active-color-primary me-3"
+                           data-cy="edit-appointment-button"
                            title="Editar">
                             <i class="fas fa-edit fa-sm"></i>
                         </a>
                         <button type="button"
                                 (click)="questionDeleteAppointment(appointment)"
                                 class="icon-color btn btn-bg-light btn-active-color-danger btn-sm"
+                                data-cy="delete-appointment-button"
                                 title="Eliminar">
                             <i class="fas fa-trash fa-sm"></i>
                         </button>
