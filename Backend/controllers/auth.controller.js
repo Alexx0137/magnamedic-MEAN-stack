@@ -39,7 +39,7 @@ authCtrl.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ message: "Contraseña incorrecta" });
 
-    const token = jwt.sign({ _id: user._id }, 'secretKey');
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
     return res.status(200).json({
         token,
         user: {

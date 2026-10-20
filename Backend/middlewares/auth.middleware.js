@@ -10,7 +10,7 @@ function verifyToken(req, res, next) {
         return res.status(401).send('Unauthorized request');
     }
     try {
-        const payload = jwt.verify(token, 'secretKey');
+        const payload = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = payload._id;
         next();
     } catch (err) {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const URI = 'mongodb://localhost/magnamedic';
+const URI = process.env.MONGODB_URI || 'mongodb://localhost/magnamedic';
 
 mongoose.connect(URI)
     .then(db => console.log('DB is connected'))
